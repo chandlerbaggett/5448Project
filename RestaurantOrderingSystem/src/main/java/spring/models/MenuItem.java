@@ -6,7 +6,7 @@ public class MenuItem {
 	
 	private String name;
 	
-	private String descroption;
+	private String description;
 	
 	private double price;
 	
@@ -18,7 +18,7 @@ public class MenuItem {
 
 	public MenuItem(String name, String descroption, double price, Image image) {
 		this.name = name;
-		this.descroption = descroption;
+		this.description = descroption;
 		this.price = price;
 		this.image = image;
 	}
@@ -32,11 +32,11 @@ public class MenuItem {
 	}
 
 	public String getDescroption() {
-		return descroption;
+		return description;
 	}
 
 	public void setDescroption(String descroption) {
-		this.descroption = descroption;
+		this.description = descroption;
 	}
 
 	public double getPrice() {
