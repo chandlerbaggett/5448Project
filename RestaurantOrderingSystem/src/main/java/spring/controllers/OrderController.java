@@ -2,18 +2,20 @@ package spring.controllers;
 
 import spring.models.MenuItem;
 import spring.models.Order;
+import spring.models.OrderHistory;
 import spring.models.OrderItem;
 import spring.models.OrderMemento;
+import spring.models.User;
 
 public class OrderController {
 	
-	Order order;	
-	User customer;
-	RealRestaurant restaurant;
+	private Order order;	
+	private User customer;
+	private Restaurant restaurant;
 	
 	public Order createOrder(){
 		this.order = new Order();		
-		orderHistory = customer.getOrderHistory();
+		OrderHistory orderHistory = customer.getOrderHistory();
 		orderHistory.addOrder(order);		
 		return order;
 	}

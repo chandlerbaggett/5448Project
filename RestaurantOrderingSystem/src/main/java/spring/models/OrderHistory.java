@@ -10,7 +10,7 @@ public class OrderHistory {
 	}
 	
 	public Collection<Order> getOrdersByStatus(String status) {
-		//todo filter based on status
+		//TODO filter based on status
 		return orders;
 	}
 	

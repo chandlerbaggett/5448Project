@@ -20,7 +20,6 @@ public class Order implements Cloneable{
 		this.orderItems = new ArrayList<OrderItem>();
 		orderStatus = "ACTIVE";
 		orderDate = Calendar.getInstance().getTime();
-		
 	}
 	
 	public int getOrderId(){
@@ -32,15 +31,15 @@ public class Order implements Cloneable{
 	}
 	
 	public void addItem(OrderItem orderItem){
-		//ADD CODE
+		//TODO ADD CODE
 	}
 	
 	public void removeItem(OrderItem orderItem){
-		//ADD CODE
+		//TODO ADD CODE
 	}
 	
 	public double calculateOrderTotal(){
-		//ADD CODE
+		//TODO ADD CODE
 		return 0.00;
 	}
 	
@@ -61,11 +60,12 @@ public class Order implements Cloneable{
 	}
 	
 	public OrderMemento createMemento(){
-		//ADD CODE
+		//TODO ADD CODE
+		return null;
 	}
 	
 	public void setMemento(OrderMemento orderMemento){
-		//ADD CODE
+		//TODO ADD CODE
 	}
 	
 	public Order clone(){
