@@ -5,6 +5,7 @@ import spring.models.Order;
 import spring.models.OrderHistory;
 import spring.models.OrderItem;
 import spring.models.OrderMemento;
+import spring.models.Restaurant;
 import spring.models.User;
 
 public class OrderController {

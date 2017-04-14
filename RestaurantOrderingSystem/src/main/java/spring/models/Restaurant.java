@@ -1,6 +1,4 @@
-package spring.controllers;
-
-import spring.models.OrderHistory;
+package spring.models;
 
 public interface Restaurant {
 
