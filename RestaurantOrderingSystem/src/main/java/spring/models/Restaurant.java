@@ -6,15 +6,13 @@ public interface Restaurant {
 	public void setName(String name);
 	
 	public String getLocation();
-	public String setLocation(String location);
+	public void setLocation(String location);
 	
-	//TODO implement classes
-//	public Menu getMenu();
-//	public void setMenu(Menu menu);
+	public Menu getMenu();
+	public void setMenu(Menu menu);
 	
-	//TODO implement classes
-//	public StaffList getStaff();
-//	public void setStaff(StaffList staffList);
+	public StaffList getStaff();
+	public void setStaff(StaffList staffList);
 	
 	
 	public boolean isOpen();
