@@ -1,5 +1,7 @@
 package spring.controllers;
 
+import java.util.ArrayList;
+
 import spring.models.MenuItem;
 import spring.models.Order;
 import spring.models.OrderHistory;
@@ -13,6 +15,7 @@ public class OrderController {
 	private Order order;	
 	private User customer;
 	private Restaurant restaurant;
+	private ArrayList<OrderMemento> mementos = new ArrayList<OrderMemento>();
 	
 	public Order createOrder(){
 		this.order = new Order();		
@@ -37,12 +40,11 @@ public class OrderController {
 	}
 	
 	public void saveOrder(Order order){		
-		order.createMemento();
+		mementos.add(order.createMemento());		
 	}
 	
-	public Order resumeOrder(){
-		OrderMemento memento = new OrderMemento();
-		order.setMemento(memento);
+	public Order resumeOrder(){		
+		order.setMemento(mementos.get(1));
 		return order;
 	}
 	
@@ -61,9 +63,9 @@ public class OrderController {
 	
 	public Order duplicateOrder(){
 		Order duplicate = order.clone();
-		//order.setorderId();
 		order.setOrderStatus("Active");
 		return duplicate;
 	}
+	
 
 }

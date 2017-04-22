@@ -16,7 +16,7 @@ public class Order implements Cloneable{
 	private Date orderDate;
 	
 	public Order(){
-		//set OrderId
+		//set OrderId/ set by hibernate?
 		this.orderItems = new ArrayList<OrderItem>();
 		orderStatus = "ACTIVE";
 		orderDate = Calendar.getInstance().getTime();
@@ -31,16 +31,46 @@ public class Order implements Cloneable{
 	}
 	
 	public void addItem(OrderItem orderItem){
-		//TODO ADD CODE
+		
+		if(orderItems.contains(orderItem)){
+			int itemIndex = orderItems.indexOf(orderItem);
+			int itemQuantity = orderItems.get(itemIndex).getQuantity();
+			orderItems.get(itemIndex).setQuantity(itemQuantity+1);
+			
+			//or
+			//orderItems.get(orderItems.indexOf(orderItem)).setQuantity(orderItems.get(orderItems.indexOf(orderItem)).getQuantity()+1);
+		}
+		else{
+			orderItems.add(orderItem);
+		}
+		
 	}
 	
 	public void removeItem(OrderItem orderItem){
-		//TODO ADD CODE
+		
+		if(orderItems.contains(orderItem)){
+			int itemIndex = orderItems.indexOf(orderItem);
+			int itemQuantity = orderItems.get(itemIndex).getQuantity();
+			
+			if(itemQuantity > 1){
+				orderItems.get(itemIndex).setQuantity(itemQuantity-1);
+			}
+			else{
+				orderItems.remove(orderItem);
+			}
+			
+		}
+		
 	}
 	
 	public double calculateOrderTotal(){
-		//TODO ADD CODE
-		return 0.00;
+		double total = 0.00;
+		
+		for(OrderItem item : orderItems){				
+			total += (item.getMenuItem().getPrice()*item.getQuantity());
+		}	
+		
+		return  total;
 	}
 	
 	public String getOrderStatus(){
@@ -59,13 +89,17 @@ public class Order implements Cloneable{
 		this.orderDate = orderDate;
 	}
 	
+	//save
 	public OrderMemento createMemento(){
-		//TODO ADD CODE
-		return null;
+		return new OrderMemento(this);
 	}
 	
-	public void setMemento(OrderMemento orderMemento){
-		//TODO ADD CODE
+	//restore
+	public void setMemento(OrderMemento memento){
+		this.orderId = memento.getOrder().getOrderId();
+		this.orderDate = memento.getOrder().getOrderDate();
+		this.orderStatus = memento.getOrder().getOrderStatus();
+		this.orderItems = memento.getOrder().getOrderItems();
 	}
 	
 	public Order clone(){
@@ -78,6 +112,10 @@ public class Order implements Cloneable{
 		}
 		
 		return clone;
+	}
+	
+	private List<OrderItem>  getOrderItems(){
+		return this.orderItems;
 	}
 
 

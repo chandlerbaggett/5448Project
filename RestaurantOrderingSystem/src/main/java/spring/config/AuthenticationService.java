@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationService implements UserDetailsService {
-	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		//TODO add actual database access for getting user
 		if (username.equals("username")) {
