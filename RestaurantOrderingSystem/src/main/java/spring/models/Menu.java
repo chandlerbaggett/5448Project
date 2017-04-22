@@ -15,7 +15,7 @@ public class Menu {
 		menuItems.add(menuItem);
 	}
 	
-	public void RemoveMenuItem(MenuItem menuItem) {
+	public void removeMenuItem(MenuItem menuItem) {
 		menuItems.remove(menuItem);
 	}
 }
