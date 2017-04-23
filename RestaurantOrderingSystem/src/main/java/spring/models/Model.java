@@ -1,10 +1,12 @@
 package spring.models;
 
-//@MappedSuperclass
+import javax.persistence.*;
+
+@MappedSuperclass
 public abstract class Model {
 
-	//@Id
-	//@GeneratedValue
+	@Id
+	@GeneratedValue
 	int id;
 
 	public int getId() {
