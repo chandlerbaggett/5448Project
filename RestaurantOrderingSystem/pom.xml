@@ -40,6 +40,27 @@
 	    <artifactId>spring-security-config</artifactId>
 	    <version>4.2.2.RELEASE</version>
 	  </dependency>
+	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-core</artifactId>
+	    <version>5.2.9.Final</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-jpamodelgen -->
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-jpamodelgen</artifactId>
+	    <version>5.2.5.Final</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>5.1.41</version>
+	</dependency>
+	  
+	  
   </dependencies>
   <build>
     <finalName>RestaurantOrderingSystem</finalName>

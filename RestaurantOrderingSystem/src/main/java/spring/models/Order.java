@@ -5,14 +5,23 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Order implements Cloneable{
+import javax.persistence.*;
+import javax.persistence.Entity;
+
+
+@Entity
+@Table(name = "ORDERS")
+public class Order extends Model implements Cloneable{
 	
-	private int orderId;
+	//@Id
+	private Integer orderId;
 	
+	@Embedded
 	private List<OrderItem> orderItems;
 	
 	private String orderStatus;
 	
+	//@Transient
 	private Date orderDate;
 	
 	public Order(){

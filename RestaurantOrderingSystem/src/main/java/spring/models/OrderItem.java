@@ -1,5 +1,8 @@
 package spring.models;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class OrderItem {
 
 	private MenuItem menuItem;
