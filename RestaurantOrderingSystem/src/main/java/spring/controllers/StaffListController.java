@@ -1,13 +1,24 @@
 package spring.controllers;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import spring.models.OrderHistory;
 import spring.models.Permission;
 import spring.models.StaffList;
 import spring.models.User;
 
+@Controller
 public class StaffListController {
-	private StaffList staffList;
+	private StaffList staffList = new StaffList();
 
+	@GetMapping("/manageStaff")
+	public String welcome(Model model) {
+		model.addAttribute("lists", staffList.getStaffMembers());
+		return "manageStaff";
+	}
+	
 	public User createStaffAccount(String userName, String password) {
 		boolean canViewOrders = true;
 		boolean canEditStaff = false;
