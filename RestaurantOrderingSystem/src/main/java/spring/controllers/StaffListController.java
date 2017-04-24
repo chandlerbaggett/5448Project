@@ -8,6 +8,7 @@ import spring.models.OrderHistory;
 import spring.models.Permission;
 import spring.models.StaffList;
 import spring.models.User;
+import utils.DBManager;
 
 @Controller
 public class StaffListController {
@@ -44,7 +45,7 @@ public class StaffListController {
 		staffUser.setDisplayName(userName);
 		staffUser.setOrderHistory(new OrderHistory());
 		
-		//TODO save user to db
+		DBManager.saveModel(staffUser);
 		
 		Permission permission = new Permission(false, canViewOrders, canEditStaff, canEditMenu);
 		addStaffMember(staffUser, permission);
@@ -54,10 +55,11 @@ public class StaffListController {
 	
 	private void  addStaffMember(User user, Permission permission) {
 		staffList.addStaffMember(user, permission);
-		//TODO save staffList to DB
+//		DBManager.saveModel(staffList);
 	}
 	
 	public void removeStaffMember(User user) {
 		staffList.removeStaffMember(user);
+//		DBManager.saveModel(staffList);
 	}
 }

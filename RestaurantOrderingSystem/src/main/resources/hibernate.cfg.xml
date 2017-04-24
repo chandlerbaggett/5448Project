@@ -41,6 +41,7 @@
  <property name="hibernate.hbm2ddl.auto">create</property> 
 
  <mapping class="spring.models.Order"/>
+ <mapping class="spring.models.User"/>
 
 </session-factory>
 
