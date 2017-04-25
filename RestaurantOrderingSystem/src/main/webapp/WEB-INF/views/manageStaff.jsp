@@ -6,16 +6,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+	table, th, td {
+    	border: 1px solid black;
+	}
+</style>
 <title>Staff Management</title>
 </head>
 <body>
-	<c:if test="${not empty lists}">
-		<ul>
+	<table>
+		<tr>
+			<th>Username</th>
+		</tr>
+		<c:if test="${not empty lists}">
 			<c:forEach var="listValue" items="${lists}">
-				<li>${listValue.getUser().getDisplayName()}</li>
+				<tr>
+					<td>${listValue.getUser().getDisplayName()}</td>
+					<td>
+						<form action="./remove" method = "POST" th:object="${listValue.getUser()}">
+							<input name="submittype" type="submit" value="remove" />
+							<input type="hidden" name="id" value="${listValue.getUser().getId()}" />
+							<input type="hidden" name="userName" value="${listValue.getUser().getUserName()}" />
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+						</form>
+					</td>
+				</tr>
 			</c:forEach>
-		</ul>
-	</c:if>
+		</c:if>
+	</table>
 </body>
 </html>
 
