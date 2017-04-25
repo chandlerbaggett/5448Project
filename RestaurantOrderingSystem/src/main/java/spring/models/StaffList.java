@@ -4,7 +4,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class StaffList {
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "STAFFLISTS")
+public class StaffList extends Model {
+	@OneToMany(cascade = {CascadeType.ALL})
 	private Collection<StaffMember> staffMembers;
 
 	public StaffList() {

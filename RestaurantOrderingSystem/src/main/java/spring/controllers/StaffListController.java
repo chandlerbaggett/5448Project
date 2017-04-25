@@ -16,8 +16,17 @@ public class StaffListController {
 
 	@GetMapping("/manageStaff")
 	public String welcome(Model model) {
+		buildTest();
 		model.addAttribute("lists", staffList.getStaffMembers());
 		return "manageStaff";
+	}
+	
+	private void buildTest() {
+		createStaffAccount("steve", "");
+		createStaffAccount("greg", "");
+		createStaffAccount("sven", "");
+		
+		createAdminAccount("tom", "");
 	}
 	
 	public User createStaffAccount(String userName, String password) {
@@ -55,11 +64,11 @@ public class StaffListController {
 	
 	private void  addStaffMember(User user, Permission permission) {
 		staffList.addStaffMember(user, permission);
-//		DBManager.saveModel(staffList);
+		DBManager.saveModel(staffList);
 	}
 	
 	public void removeStaffMember(User user) {
 		staffList.removeStaffMember(user);
-//		DBManager.saveModel(staffList);
+		DBManager.saveModel(staffList);
 	}
 }
