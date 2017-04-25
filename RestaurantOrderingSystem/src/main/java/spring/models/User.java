@@ -1,11 +1,24 @@
 package spring.models;
 
-public class User {
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "USERS")
+public class User extends Model {
 	private String displayName;
 	private String userName;
 	private String password;
+	
+	@Embedded
 	private OrderHistory orderHistory;
 	
+	
+	public User() {
+		super();
+	}
+
 	public String getDisplayName() {
 		return displayName;
 	}

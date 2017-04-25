@@ -59,4 +59,8 @@ public class StaffList {
 		
 		return null;
 	}
+
+	public Collection<StaffMember> getStaffMembers() {
+		return staffMembers;
+	}
 }

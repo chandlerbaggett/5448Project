@@ -2,7 +2,12 @@ package spring.models;
 
 import java.util.Collection;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.ManyToOne;
+
 public class OrderHistory {
+	@ElementCollection
 	private Collection<Order> orders;
 	
 	public Collection<Order> getAllOrders() {
