@@ -80,7 +80,7 @@ public class StaffListController {
 		
 		removeStaffMember(user);
 		
-		return new ModelAndView(new RedirectView(""));
+		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/manageStaff/"));
 	}
 	
 	public void removeStaffMember(User user) {

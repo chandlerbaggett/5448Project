@@ -23,7 +23,7 @@
 				<tr>
 					<td>${listValue.getUser().getDisplayName()}</td>
 					<td>
-						<form action="./remove" method = "POST" th:object="${listValue.getUser()}">
+						<form action="/RestaurantOrderingSystem/manageStaff/remove" method = "POST" th:object="${listValue.getUser()}">
 							<input name="submittype" type="submit" value="remove" />
 							<input type="hidden" name="id" value="${listValue.getUser().getId()}" />
 							<input type="hidden" name="userName" value="${listValue.getUser().getUserName()}" />
