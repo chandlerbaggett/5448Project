@@ -11,8 +11,8 @@ import spring.models.Order;
 import spring.models.OrderHistory;
 import spring.models.OrderItem;
 import spring.models.OrderMemento;
-import spring.models.RealRestaurant;
 import spring.models.Restaurant;
+import spring.models.RestaurantProxy;
 import spring.models.User;
 import utils.DBManager;
 
@@ -21,7 +21,7 @@ public class OrderController {
 	
 	private Order order;	
 	private User customer;
-	private Restaurant restaurant = new RealRestaurant();
+	private Restaurant restaurant = new RestaurantProxy();
 	private ArrayList<OrderMemento> mementos = new ArrayList<OrderMemento>();
 	
 	@GetMapping("/orderWelcome")
