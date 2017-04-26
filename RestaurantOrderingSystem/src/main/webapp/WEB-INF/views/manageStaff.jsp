@@ -23,7 +23,7 @@
 				<tr>
 					<td>${listValue.getUser().getDisplayName()}</td>
 					<td>
-						<form action="/RestaurantOrderingSystem/manageStaff/remove" method = "POST" th:object="${listValue.getUser()}">
+						<form action="/RestaurantOrderingSystem/manageStaff/remove" method = "POST" th:object="${user}">
 							<input name="submittype" type="submit" value="remove" />
 							<input type="hidden" name="id" value="${listValue.getUser().getId()}" />
 							<input type="hidden" name="userName" value="${listValue.getUser().getUserName()}" />
@@ -34,6 +34,13 @@
 			</c:forEach>
 		</c:if>
 	</table>
+	
+	 <form action="/RestaurantOrderingSystem/manageStaff/add" th:object="${user}" method="post">
+    	<p>Username: <input type="text" name="userName"/></p>
+        <p>Password: <input type="text" name="password"/></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    </form>
 </body>
 </html>
 

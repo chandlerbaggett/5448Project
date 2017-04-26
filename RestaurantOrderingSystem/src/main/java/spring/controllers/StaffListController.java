@@ -16,18 +16,33 @@ import utils.DBManager;
 
 @Controller
 public class StaffListController {
+	//TODO access this from the restaurant
 	private StaffList staffList = new StaffList();
 
 	@GetMapping("/manageStaff")
 	public String loadPage(Model model) {
 		if (DBManager.getModel(User.class, 1) == null) {
-			buildTest();
+			buildTestData();
 		}
 		model.addAttribute("lists", staffList.getStaffMembers());
 		return "manageStaff";
 	}
 	
-	private void buildTest() {
+	@PostMapping("/manageStaff/remove")
+	public ModelAndView removeUser(User user, Model model) {
+		removeStaffMember(user);
+		
+		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/manageStaff/"));
+	}
+	
+	@PostMapping("/manageStaff/add")
+	public ModelAndView addUser(User user, Model model) {
+		createStaffAccount(user.getUserName(), user.getPassword());
+		
+		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/manageStaff/"));
+	}
+	
+	private void buildTestData() {
 		createStaffAccount("steve", "");
 		createStaffAccount("greg", "");
 		createStaffAccount("sven", "");
@@ -71,16 +86,6 @@ public class StaffListController {
 	private void  addStaffMember(User user, Permission permission) {
 		staffList.addStaffMember(user, permission);
 		DBManager.saveModel(staffList);
-	}
-	
-	@PostMapping("/manageStaff/remove")
-	public ModelAndView stuff(User user, Model model) {
-		System.out.println("clicked remove: "+user.getId());
-		System.out.println("clicked remove: "+user.getUserName());
-		
-		removeStaffMember(user);
-		
-		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/manageStaff/"));
 	}
 	
 	public void removeStaffMember(User user) {
