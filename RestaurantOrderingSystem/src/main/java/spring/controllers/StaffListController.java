@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import spring.formModels.CreateUser;
 import spring.models.OrderHistory;
 import spring.models.Permission;
 import spring.models.StaffList;
@@ -36,8 +37,13 @@ public class StaffListController {
 	}
 	
 	@PostMapping("/manageStaff/add")
-	public ModelAndView addUser(User user, Model model) {
-		createStaffAccount(user.getUserName(), user.getPassword());
+	public ModelAndView addUser(CreateUser user, Model model) {
+		if (user.isAdmin()) {
+			createAdminAccount(user.getUserName(), user.getPassword());
+		
+		} else {
+			createStaffAccount(user.getUserName(), user.getPassword());
+		}
 		
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/manageStaff/"));
 	}

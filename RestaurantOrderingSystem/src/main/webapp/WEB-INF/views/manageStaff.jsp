@@ -35,11 +35,12 @@
 		</c:if>
 	</table>
 	
-	 <form action="/RestaurantOrderingSystem/manageStaff/add" th:object="${user}" method="post">
-    	<p>Username: <input type="text" name="userName"/></p>
-        <p>Password: <input type="text" name="password"/></p>
-        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	 <form action="/RestaurantOrderingSystem/manageStaff/add" th:object="${createUser}" method="post">
+	 	<p>Username:  <input type="text" name="userName"/></p>
+	 	<p>Password:  <input type="text" name="password"/></p>
+	 	<p>is Admin?: <input type="checkbox" name="admin"/>
+	 	<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+	 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form>
 </body>
 </html>
