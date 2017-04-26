@@ -7,7 +7,11 @@ public class OrderItem {
 
 	private MenuItem menuItem;
 	
-	private int quantity;
+	private int quantity = 1;
+	
+	public OrderItem() {
+		this.menuItem = new MenuItem();
+	}	
 
 	public OrderItem(MenuItem menuItem) {
 		this.menuItem = menuItem;

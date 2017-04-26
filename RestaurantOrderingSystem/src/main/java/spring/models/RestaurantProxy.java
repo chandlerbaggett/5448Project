@@ -1,7 +1,7 @@
 package spring.models;
 
 public class RestaurantProxy implements Restaurant {
-	private RealRestaurant restaurant;
+	private RealRestaurant restaurant = new RealRestaurant();
 
 	public String getName() {
 		// TODO Auto-generated method stub
@@ -45,21 +45,19 @@ public class RestaurantProxy implements Restaurant {
 
 	public boolean isOpen() {
 		// TODO Auto-generated method stub
-		return false;
+		return restaurant.isOpen();
 	}
 
 	public void setIsOpen(boolean isOpen) {
-		// TODO Auto-generated method stub
-		
+		restaurant.setIsOpen(isOpen);
 	}
 
 	public OrderHistory getOrders() {
-		// TODO Auto-generated method stub
-		return null;
+		return restaurant.getOrders();
 	}
 
 	public void setOrders(OrderHistory orderHistory) {
-		// TODO Auto-generated method stub
+		restaurant.setOrders(orderHistory);
 		
 	}
 }
