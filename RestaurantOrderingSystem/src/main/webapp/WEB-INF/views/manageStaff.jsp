@@ -6,16 +6,46 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+	table, th, td {
+    	border: 1px solid black;
+	}
+</style>
 <title>Staff Management</title>
 </head>
 <body>
-	<c:if test="${not empty lists}">
-		<ul>
+	<table>
+		<tr>
+			<th>Username</th>
+			<th>Can edit staff</th>
+			<th>Can edit menu</th>
+		</tr>
+		<c:if test="${not empty lists}">
 			<c:forEach var="listValue" items="${lists}">
-				<li>${listValue.getUser().getDisplayName()}</li>
+				<tr>
+					<td>${listValue.getUser().getDisplayName()}</td>
+					<td>${listValue.getPermission().canEditRestaurantStaff()}</td>
+					<td>${listValue.getPermission().canEditRestaurantMenu()}</td>
+					<td>
+						<form action="/RestaurantOrderingSystem/manageStaff/remove" method = "POST" th:object="${user}">
+							<input name="submittype" type="submit" value="remove" />
+							<input type="hidden" name="id" value="${listValue.getUser().getId()}" />
+							<input type="hidden" name="userName" value="${listValue.getUser().getUserName()}" />
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+						</form>
+					</td>
+				</tr>
 			</c:forEach>
-		</ul>
-	</c:if>
+		</c:if>
+	</table>
+	
+	 <form action="/RestaurantOrderingSystem/manageStaff/add" th:object="${createUser}" method="post">
+	 	<p>Username:  <input type="text" name="userName"/></p>
+	 	<p>Password:  <input type="text" name="password"/></p>
+	 	<p>is Admin?: <input type="checkbox" name="admin"/>
+	 	<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+	 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    </form>
 </body>
 </html>
 
