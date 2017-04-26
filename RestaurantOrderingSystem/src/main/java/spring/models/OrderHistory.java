@@ -1,5 +1,6 @@
 package spring.models;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.ElementCollection;
@@ -8,7 +9,7 @@ import javax.persistence.ManyToOne;
 
 public class OrderHistory {
 	@ElementCollection
-	private Collection<Order> orders;
+	private Collection<Order> orders = new ArrayList<Order>();
 	
 	public Collection<Order> getAllOrders() {
 		return orders;

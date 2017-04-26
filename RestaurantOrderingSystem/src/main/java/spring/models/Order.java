@@ -4,16 +4,15 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
 
 
 @Entity
 @Table(name = "ORDERS")
 public class Order extends Model implements Cloneable{
 	
-	//@Id
 	private Integer orderId;
 	
 	@Embedded
@@ -21,11 +20,11 @@ public class Order extends Model implements Cloneable{
 	
 	private String orderStatus;
 	
-	//@Transient
 	private Date orderDate;
 	
 	public Order(){
-		//set OrderId/ set by hibernate?
+		Random rand = new Random();
+		this.orderId = 0 + rand.nextInt((500 - 0) + 1);
 		this.orderItems = new ArrayList<OrderItem>();
 		orderStatus = "ACTIVE";
 		orderDate = Calendar.getInstance().getTime();
@@ -123,7 +122,7 @@ public class Order extends Model implements Cloneable{
 		return clone;
 	}
 	
-	private List<OrderItem>  getOrderItems(){
+	public List<OrderItem>  getOrderItems(){
 		return this.orderItems;
 	}
 
