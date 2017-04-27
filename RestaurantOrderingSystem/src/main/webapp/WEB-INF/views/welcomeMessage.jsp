@@ -8,7 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>Welcome, ${firstName}</p>
+	<p>Welcome</p>
+	
+	<a href="/RestaurantOrderingSystem/manageStaff">Manage Staff</a> <br/>
+	
+	<a href="/RestaurantOrderingSystem/viewMenu">View Menu</a><br/>
+	
+	<a href="/RestaurantOrderingSystem/createOrder">Start Order</a><br/>
 	
 	 <form class="form-inline" action="/RestaurantOrderingSystem/logout" method="post">
       <input type="submit" value="Log out" />
