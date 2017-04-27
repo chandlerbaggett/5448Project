@@ -14,7 +14,7 @@
 	
 	<a href="/RestaurantOrderingSystem/viewMenu">View Menu</a><br/>
 	
-	<a href="/RestaurantOrderingSystem/createOrder">Start Order</a><br/>
+	<a href="/RestaurantOrderingSystem/manageOrder">Start Order</a><br/>
 	
 	 <form class="form-inline" action="/RestaurantOrderingSystem/logout" method="post">
       <input type="submit" value="Log out" />

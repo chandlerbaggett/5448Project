@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import spring.config.HibernateUtil;
+import spring.models.Order;
 import spring.models.User;
 
 public class DBManager {
@@ -48,5 +49,21 @@ public class DBManager {
 		session.close();	
 		
 		return user;
+	}
+	
+	public static Order getOrder() {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		
+		Session session = sessionFactory.openSession();	
+		session.beginTransaction();
+		
+		Query<Order> query=  session.createQuery("from Order ");
+
+		Order order = (Order) query.uniqueResult();
+		
+		session.getTransaction().commit();	
+		session.close();	
+		
+		return order;
 	}
 }

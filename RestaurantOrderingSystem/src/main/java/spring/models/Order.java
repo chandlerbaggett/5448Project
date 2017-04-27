@@ -15,7 +15,7 @@ public class Order extends Model implements Cloneable{
 	
 	private Integer orderId;
 	
-	@Embedded
+	@OneToMany
 	private List<OrderItem> orderItems;
 	
 	private String orderStatus;
@@ -26,6 +26,7 @@ public class Order extends Model implements Cloneable{
 		Random rand = new Random();
 		this.orderId = 0 + rand.nextInt((500 - 0) + 1);
 		this.orderItems = new ArrayList<OrderItem>();
+		this.setOrderItems(orderItems);
 		orderStatus = "ACTIVE";
 		orderDate = Calendar.getInstance().getTime();
 	}
@@ -40,6 +41,7 @@ public class Order extends Model implements Cloneable{
 	
 	public void addItem(OrderItem orderItem){
 		
+		this.setOrderItems(orderItems);
 		if(orderItems.contains(orderItem)){
 			int itemIndex = orderItems.indexOf(orderItem);
 			int itemQuantity = orderItems.get(itemIndex).getQuantity();
@@ -55,7 +57,7 @@ public class Order extends Model implements Cloneable{
 	}
 	
 	public void removeItem(OrderItem orderItem){
-		
+		this.setOrderItems(orderItems);
 		if(orderItems.contains(orderItem)){
 			int itemIndex = orderItems.indexOf(orderItem);
 			int itemQuantity = orderItems.get(itemIndex).getQuantity();
@@ -126,5 +128,8 @@ public class Order extends Model implements Cloneable{
 		return this.orderItems;
 	}
 
+	public void  setOrderItems(List<OrderItem> orderItems){
+		this.orderItems = orderItems;
+	}	
 
 }
