@@ -16,18 +16,16 @@ import utils.DBManager;
 @Service
 public class AuthenticationService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		if (DBManager.getModel(User.class, 1) == null) {
-			User user = new User();
-			user.setUserName("username");
-			user.setPassword("password");
-			
-			user.setDisplayName("username");
-			user.setOrderHistory(new OrderHistory());
-			
-			DBManager.saveModel(user);
-		};
+		User user = new User();
+		user.setUserName("username");
+		user.setPassword("password");
 		
-		User user = DBManager.getUser(username);
+		user.setDisplayName("username");
+		user.setOrderHistory(new OrderHistory());
+				
+		DBManager.saveModel(user);
+		
+		user = DBManager.getUser(username);
 		
 		if (user != null) {	
 			GrantedAuthority authority = new SimpleGrantedAuthority("USER");

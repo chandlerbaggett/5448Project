@@ -25,9 +25,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          	.antMatchers("/createAccount").anonymous()
             .anyRequest().authenticated()
             .and()
-            .formLogin()
+            .formLogin().defaultSuccessUrl("/welcome", true)
             .loginPage("/login")
             .permitAll()
+           
         
             .and()
             .csrf().disable();
