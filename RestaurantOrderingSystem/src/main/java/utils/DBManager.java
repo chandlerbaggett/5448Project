@@ -2,8 +2,10 @@ package utils;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import spring.config.HibernateUtil;
+import spring.models.User;
 
 public class DBManager {
 	public static void saveModel(Object object) {
@@ -30,5 +32,21 @@ public class DBManager {
 		session.close();	
 		
 		return object;
+	}
+	
+	public static User getUser(String username) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		
+		Session session = sessionFactory.openSession();	
+		session.beginTransaction();
+		
+		Query<User> query=  session.createQuery("from User where userName = '"+username+"'");
+
+		User user = (User) query.uniqueResult();
+		
+		session.getTransaction().commit();	
+		session.close();	
+		
+		return user;
 	}
 }

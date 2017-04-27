@@ -10,7 +10,7 @@
 <body>
 	<p>Welcome, ${firstName}</p>
 	
-	 <form class="form-inline" action="logout" method="post">
+	 <form class="form-inline" action="/RestaurantOrderingSystem/logout" method="post">
       <input type="submit" value="Log out" />
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form>
