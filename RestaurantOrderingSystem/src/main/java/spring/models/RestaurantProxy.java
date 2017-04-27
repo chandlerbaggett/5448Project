@@ -3,6 +3,11 @@ package spring.models;
 public class RestaurantProxy implements Restaurant {
 	private RealRestaurant restaurant = new RealRestaurant();
 
+	public RestaurantProxy(RealRestaurant restaurant) {
+		super();
+		this.restaurant = restaurant;
+	}
+
 	public String getName() {
 		// TODO Auto-generated method stub
 		return null;

@@ -5,6 +5,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import spring.config.HibernateUtil;
+import spring.models.RealRestaurant;
+import spring.models.Restaurant;
+import spring.models.RestaurantProxy;
 import spring.models.User;
 
 public class DBManager {
@@ -48,5 +51,19 @@ public class DBManager {
 		session.close();	
 		
 		return user;
+	}
+	
+	public static Restaurant getRestaurant() {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		
+		Session session = sessionFactory.openSession();	
+		session.beginTransaction();
+		
+		RealRestaurant restaurant = session.get(RealRestaurant.class, 1);
+		
+		session.getTransaction().commit();	
+		session.close();	
+		
+		return new RestaurantProxy(restaurant);	
 	}
 }
