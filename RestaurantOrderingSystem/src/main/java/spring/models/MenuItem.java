@@ -2,7 +2,14 @@ package spring.models;
 
 import java.awt.Image;
 
-public class MenuItem {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "MENU_ITEMS")
+public class MenuItem extends Model{
 	
 	private String name;
 	
@@ -10,6 +17,7 @@ public class MenuItem {
 	
 	private double price;
 	
+	@Transient
 	private Image image;
 
 	public MenuItem() {

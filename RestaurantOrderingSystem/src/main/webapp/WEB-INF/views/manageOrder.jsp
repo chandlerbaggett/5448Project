@@ -50,7 +50,7 @@
 					<td>
 						<form action="/RestaurantOrderingSystem/manageOrder/remove" method = "POST" th:object="${orderItem}">
 							<input name="submittype" type="submit" value="Remove" />
-							<input type="hidden" name="id" value="${order.getId()}" />
+							<input type="hidden" name="id" value="${listValue.getId()}" />
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						</form>
 					</td>

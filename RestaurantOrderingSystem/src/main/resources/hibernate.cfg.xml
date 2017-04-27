@@ -45,6 +45,7 @@
  <mapping class="spring.models.User"/>
  <mapping class="spring.models.StaffList"/>
  <mapping class="spring.models.StaffMember"/>
+ <mapping class="spring.models.MenuItem"/>
  
 </session-factory>
 
