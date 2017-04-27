@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import spring.config.HibernateUtil;
+import spring.models.Order;
 import spring.models.RealRestaurant;
 import spring.models.Restaurant;
 import spring.models.RestaurantProxy;
@@ -53,6 +54,7 @@ public class DBManager {
 		return user;
 	}
 	
+
 	public static Restaurant getRestaurant() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		
@@ -65,5 +67,21 @@ public class DBManager {
 		session.close();	
 		
 		return new RestaurantProxy(restaurant);	
+}
+
+	public static Order getOrder() {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		
+		Session session = sessionFactory.openSession();	
+		session.beginTransaction();
+		
+		Query<Order> query=  session.createQuery("from Order ");
+
+		Order order = (Order) query.uniqueResult();
+		
+		session.getTransaction().commit();	
+		session.close();
+		
+		return order;
 	}
 }
