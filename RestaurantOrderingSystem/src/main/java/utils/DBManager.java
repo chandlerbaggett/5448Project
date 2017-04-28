@@ -3,6 +3,8 @@ package utils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import spring.config.HibernateUtil;
 import spring.models.Order;
@@ -54,7 +56,6 @@ public class DBManager {
 		return user;
 	}
 	
-
 	public static Restaurant getRestaurant() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		
@@ -67,7 +68,12 @@ public class DBManager {
 		session.close();	
 		
 		return new RestaurantProxy(restaurant);	
-}
+	}
+	
+	public static User getLoggedInUser() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		return getUser(authentication.getName());
+	}
 
 	public static Order getOrder() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
