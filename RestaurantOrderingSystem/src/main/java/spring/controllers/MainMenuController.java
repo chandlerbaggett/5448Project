@@ -14,15 +14,21 @@ import spring.models.User;
 import utils.DBManager;
 
 @Controller
-public class WelcomeController {
-	@GetMapping("/welcome")
+public class MainMenuController {
+	@GetMapping("/home")
 	public String welcome(Model model) {
 		model.addAttribute("firstName", "Elizabeth");
 		
 		buildRestaurant();
 		
+		Permission permission = new Permission(false, true, false, false);
 		
-		return "welcomeMessage";
+		model.addAttribute("showPlacedOrders", permission.canViewRestaurantOrders());
+		model.addAttribute("showPlaceOrder", permission.canMakeOrders());
+		model.addAttribute("showEditMenu", permission.canEditRestaurantMenu());
+		model.addAttribute("showManageStaff", permission.canEditRestaurantStaff());
+		
+		return "mainMenu";
 	}
 	
 	//TODO extract into fake model builder class
