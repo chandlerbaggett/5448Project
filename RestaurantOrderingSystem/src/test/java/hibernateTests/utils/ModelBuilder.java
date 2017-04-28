@@ -1,6 +1,10 @@
 package hibernateTests.utils;
 
+import java.awt.Image;
+
+import spring.models.MenuItem;
 import spring.models.OrderHistory;
+import spring.models.OrderItem;
 import spring.models.Permission;
 import spring.models.StaffList;
 import spring.models.StaffMember;
@@ -40,5 +44,25 @@ public class ModelBuilder {
 	public static StaffList buildStaffList() {
 		StaffList list = new StaffList();
 		return list;
+	}
+
+	public static MenuItem buildMenuItem(String name, double price) {
+		MenuItem item = new MenuItem();
+		item.setName(name);
+		item.setPrice(price);
+		item.setDescroption(name+price);
+		//TODO what are we doing for images?
+//		item.setImage(new Image());
+		
+		return item;
+		
+	}
+
+	public static OrderItem buildOrderItem(MenuItem menuItem, int quantity) {
+		OrderItem item = new OrderItem();
+		item.setQuantity(quantity);
+		item.setMenuItem(menuItem);
+		
+		return item;
 	}
 }
