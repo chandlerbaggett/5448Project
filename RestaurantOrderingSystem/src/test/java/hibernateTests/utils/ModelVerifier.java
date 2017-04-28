@@ -3,6 +3,8 @@ package hibernateTests.utils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import spring.models.MenuItem;
+import spring.models.Order;
 import spring.models.OrderHistory;
 import spring.models.OrderItem;
 import spring.models.Permission;
@@ -17,20 +19,44 @@ public class ModelVerifier {
 		   assertEquals("passwords should match", user1.getPassword(), user2.getPassword());
 		   assertEquals("display names should match", user1.getDisplayName(), user2.getDisplayName());
 		   
+			//TODO enable when order histories are saved
 		   verifyOrderHistories(user1.getOrderHistory(), user2.getOrderHistory());
 	}
 	
 	public static void verifyOrderHistories(OrderHistory o1, OrderHistory o2) {
-		//TODO enable when order histories are saved
-//		assertEquals(o1.getAllOrders().size(), o2.getAllOrders().size());
-//		for (int x=0; x < o1.getAllOrders().size(); x++) {
-//			verifyOrderItems(o1.getAllOrders().toArray(new OrderItem[0])[x],
-//							 o2.getAllOrders().toArray(new OrderItem[0])[x]);
-//			}
+		assertEquals("num orders should be the same", o1.getAllOrders().size(), o2.getAllOrders().size());
+		
+		for (int x=0; x < o1.getAllOrders().size(); x++) {
+			verifyOrders(o1.getAllOrders().toArray(new Order[0])[x],
+						 o2.getAllOrders().toArray(new Order[0])[x]);
+		}
 	}
 	
-	public static void verifyOrderItems(OrderItem i1, OrderItem i2) {
-		//TODO
+	public static void verifyOrderItems(OrderItem item1, OrderItem item2) {
+		assertTrue("ids should be equal", item1.getId() == item2.getId());
+		assertTrue("item quantity should be the same", item1.getQuantity() == item2.getQuantity());
+		verifyMenuItems(item1.getMenuItem(), item2.getMenuItem());
+	}
+	
+	public static void verifyOrders(Order order1, Order order2) {
+		assertTrue("ids should be equal", order1.getId() == order2.getId());
+		assertEquals("order status should be the same", order1.getOrderStatus(), order2.getOrderStatus());
+		assertEquals("order date should be the same", order1.getOrderDate(), order2.getOrderDate());
+		
+		assertTrue("num order items should be the same", order1.getOrderItems().size() == order2.getOrderItems().size());
+		
+		for (int x=0; x < order1.getOrderItems().size(); x++) {
+			verifyOrderItems(order1.getOrderItems().toArray(new OrderItem[0])[x],
+							 order2.getOrderItems().toArray(new OrderItem[0])[x]);
+		}
+	}
+	
+	public static void verifyMenuItems(MenuItem item1, MenuItem item2) {
+		assertTrue("ids should be equal", item1.getId() == item2.getId());
+		assertEquals("names should be equal", item1.getName(), item2.getName());
+		assertEquals("descriptions should be equal", item1.getDescroption(), item2.getDescroption());
+		assertTrue("prices should be equal", item1.getPrice() == item2.getPrice());
+		assertEquals("images should be the same", item1.getImage(), item2.getImage());
 	}
 
 	public static void verifyStaffMembers(StaffMember member, StaffMember member2) {
@@ -48,7 +74,7 @@ public class ModelVerifier {
 	
 	public static void verifyStaffLists(StaffList list1, StaffList list2) {
 		assertTrue("ids should be equal", list1.getId() == list2.getId());
-		assertTrue("sizes should be equal", list1.getStaffMembers().size() == list2.getStaffMembers().size());  
+		assertTrue("num staff should be the same", list1.getStaffMembers().size() == list2.getStaffMembers().size());  
 		
 		for (int x=0; x < list1.getStaffMembers().size(); x++) {
 			verifyStaffMembers(list1.getStaffMembers().toArray(new StaffMember[0])[x],
