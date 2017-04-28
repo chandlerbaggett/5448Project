@@ -3,11 +3,13 @@ package hibernateTests.utils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import spring.models.Menu;
 import spring.models.MenuItem;
 import spring.models.Order;
 import spring.models.OrderHistory;
 import spring.models.OrderItem;
 import spring.models.Permission;
+import spring.models.RealRestaurant;
 import spring.models.StaffList;
 import spring.models.StaffMember;
 import spring.models.User;
@@ -20,7 +22,7 @@ public class ModelVerifier {
 		   assertEquals("display names should match", user1.getDisplayName(), user2.getDisplayName());
 		   
 			//TODO enable when order histories are saved
-		   verifyOrderHistories(user1.getOrderHistory(), user2.getOrderHistory());
+//		   verifyOrderHistories(user1.getOrderHistory(), user2.getOrderHistory());
 	}
 	
 	public static void verifyOrderHistories(OrderHistory o1, OrderHistory o2) {
@@ -80,5 +82,20 @@ public class ModelVerifier {
 			verifyStaffMembers(list1.getStaffMembers().toArray(new StaffMember[0])[x],
 							   list2.getStaffMembers().toArray(new StaffMember[0])[x]);
 		}
+	}
+	
+	public static void verifyRestaurants(RealRestaurant restaurant1, RealRestaurant restaurant2) {
+		assertTrue("ids should be equal", restaurant1.getId() == restaurant2.getId());
+		assertEquals("locations should be the same", restaurant1.getLocation(), restaurant2.getLocation());
+		assertEquals("names should be equal", restaurant1.getName(), restaurant2.getName());
+		assertTrue("open status should be the same", restaurant1.isOpen() == restaurant2.isOpen());
+		
+		verifyMenus(restaurant1.getMenu(), restaurant2.getMenu());
+		verifyOrderHistories(restaurant1.getOrders(), restaurant2.getOrders());
+		verifyStaffLists(restaurant1.getStaff(), restaurant2.getStaff());
+	}
+	
+	public static void verifyMenus(Menu menu1, Menu menu2) {
+		//TODO when menu fully implemented
 	}
 }
