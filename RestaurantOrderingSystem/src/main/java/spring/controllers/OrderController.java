@@ -25,7 +25,7 @@ public class OrderController {
 	
 	private Order order;	
 	private User customer;
-	private Restaurant restaurant = new RestaurantProxy();
+	private Restaurant restaurant = DBManager.getRestaurant();
 	private ArrayList<OrderMemento> mementos = new ArrayList<OrderMemento>();
 	
 	@GetMapping("/manageOrder")

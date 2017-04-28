@@ -1,11 +1,27 @@
 package spring.models;
 
-public class RealRestaurant implements Restaurant {
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "RESTAURANTS")
+public class RealRestaurant extends Model implements Restaurant {
 	private String name;
 	private String location;
+	
+	//TODO make real
+	@Transient
 	private Menu menu;
+	
+	@OneToOne(cascade = {CascadeType.ALL})
 	private StaffList staffList;
 	private boolean isOpen;
+	
+	//TODO make real
+	@Transient
 	private OrderHistory orderHistory;
 	
 	public String getName() {
