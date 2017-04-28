@@ -1,7 +1,5 @@
 package hibernateTests.utils;
 
-import java.awt.Image;
-
 import spring.models.MenuItem;
 import spring.models.OrderHistory;
 import spring.models.OrderItem;
@@ -27,7 +25,6 @@ public class ModelBuilder {
 		return history;
 	}
 	
-	
 	public static Permission buildPermission() {
 		return new Permission(false, true, false, false);
 	}
@@ -38,7 +35,6 @@ public class ModelBuilder {
 		member.setPermission(permission);
 	
 		return member;
-		
 	}
 	
 	public static StaffList buildStaffList() {
@@ -55,7 +51,6 @@ public class ModelBuilder {
 //		item.setImage(new Image());
 		
 		return item;
-		
 	}
 
 	public static OrderItem buildOrderItem(MenuItem menuItem, int quantity) {
