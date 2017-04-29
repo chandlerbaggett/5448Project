@@ -12,10 +12,6 @@ import utils.TestDataBuilder;
 public class MainMenuController {
 	@GetMapping("/home")
 	public String home(Model model) {
-		if (DBManager.getRestaurant() == null) {
-			TestDataBuilder.buildTestData();
-		}
-		
 		Permission permission = DBManager.getRestaurant().getStaff().getPermissionForStaff(DBManager.getLoggedInUser());
 		
 		if (permission != null) {

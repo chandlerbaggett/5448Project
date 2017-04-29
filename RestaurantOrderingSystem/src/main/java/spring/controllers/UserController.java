@@ -17,10 +17,6 @@ import utils.TestDataBuilder;
 public class UserController {
 	@GetMapping("/login")
 	public String login(Model model) {
-		if (DBManager.getRestaurant() == null) {
-			TestDataBuilder.buildTestData();
-		}
-		
 		return "login";
 	}
 	
