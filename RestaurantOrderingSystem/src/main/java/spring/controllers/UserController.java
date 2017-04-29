@@ -43,11 +43,11 @@ public class UserController {
 		DBManager.saveModel(staffUser);
 		
 		//add confirmation message to model
-		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/welcome/"));
+		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/home/"));
 	}
 	
 	@PostMapping("/logout")
-	public String logOutAction(Model model) {
-		return "welcome";
+	public ModelAndView logOutAction(Model model) {
+		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/home/"));
 	}
 }

@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          	.antMatchers("/createAccount").anonymous()
             .anyRequest().authenticated()
             .and()
-            .formLogin().defaultSuccessUrl("/welcome", true)
+            .formLogin().defaultSuccessUrl("/home", true)
             .loginPage("/login")
             .permitAll()
            
