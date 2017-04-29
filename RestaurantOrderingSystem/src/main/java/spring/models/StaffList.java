@@ -6,13 +6,16 @@ import java.util.Iterator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "STAFFLISTS")
 public class StaffList extends Model {
-	@OneToMany(cascade = {CascadeType.ALL})
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	private Collection<StaffMember> staffMembers;
 
 	public StaffList() {
@@ -70,5 +73,9 @@ public class StaffList extends Model {
 
 	public Collection<StaffMember> getStaffMembers() {
 		return staffMembers;
+	}
+
+	public void setStaffMembers(Collection<StaffMember> staffMembers) {
+		this.staffMembers = staffMembers;
 	}
 }
