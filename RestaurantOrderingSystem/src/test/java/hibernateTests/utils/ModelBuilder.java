@@ -1,12 +1,16 @@
 package hibernateTests.utils;
 
+import spring.models.Menu;
 import spring.models.MenuItem;
+import spring.models.Order;
 import spring.models.OrderHistory;
 import spring.models.OrderItem;
 import spring.models.Permission;
+import spring.models.RealRestaurant;
 import spring.models.StaffList;
 import spring.models.StaffMember;
 import spring.models.User;
+import utils.DBManager;
 
 public class ModelBuilder {
 	public static User buildUser(String userName, String password, OrderHistory orderHistory) {
@@ -18,6 +22,37 @@ public class ModelBuilder {
 		user.setOrderHistory(orderHistory);
 		
 		return user;
+	}
+	
+	public static RealRestaurant buildRestaurant() {
+		RealRestaurant restaurant = new RealRestaurant();
+		
+		restaurant.setName("name");
+		restaurant.setLocation("place");
+		restaurant.setIsOpen(true);
+		
+		StaffList list = buildStaffList();
+		
+		OrderHistory staffHistory = buildOrderHistory();
+		list.addStaffMember(buildUser("staff", "pass", staffHistory), new Permission(false, true, false, false));
+		
+		OrderHistory adminHistory = buildOrderHistory();
+		list.addStaffMember(buildUser("admin", "pass", adminHistory), new Permission(false, true, true, true));
+		
+		restaurant.setStaff(list);
+		
+		restaurant.setMenu(buildMenu());
+		
+		restaurant.setOrders(buildOrderHistory());
+		
+		
+		DBManager.saveModel(restaurant);
+		
+		return restaurant;
+	}
+	
+	public static Menu buildMenu() {
+		return new Menu();
 	}
 	
 	public static OrderHistory buildOrderHistory() {
@@ -60,4 +95,5 @@ public class ModelBuilder {
 		
 		return item;
 	}
+	
 }
