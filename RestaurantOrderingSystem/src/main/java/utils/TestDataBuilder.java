@@ -79,7 +79,7 @@ public class TestDataBuilder {
 	private static User buildStaffUser() {
 		User staffUser = new User();
 		staffUser.setUserName("staff");
-		staffUser.setPassword("pass");
+		staffUser.setPassword("password");
 		
 		staffUser.setDisplayName("staff");
 		staffUser.setOrderHistory(buildBaseOrderHstory());
@@ -92,7 +92,7 @@ public class TestDataBuilder {
 	private static User buildAdminUser() {
 		User staffUser = new User();
 		staffUser.setUserName("admin");
-		staffUser.setPassword("pass");
+		staffUser.setPassword("password");
 		
 		staffUser.setDisplayName("admin");
 		staffUser.setOrderHistory(buildBaseOrderHstory());
