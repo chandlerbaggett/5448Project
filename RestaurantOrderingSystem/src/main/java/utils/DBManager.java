@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import spring.config.HibernateUtil;
+import spring.models.MenuItem;
 import spring.models.Order;
 import spring.models.RealRestaurant;
 import spring.models.Restaurant;
@@ -40,6 +41,24 @@ public class DBManager {
 		return object;
 	}
 	
+	public static void deleteModel(Object object)
+	{
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		
+		Session session = sessionFactory.openSession();	
+		session.beginTransaction();
+		
+
+	    //session = sessionFactory.getCurrentSession();
+	    //myObject = (MyObject)session.load(MyObject.class,id);
+	    //session.delete(myObject);
+		session.delete(object);
+	    //This makes the pending delete to be done
+	    //session.flush() ;
+		session.getTransaction().commit();	
+		session.close();	
+	}
+	
 	public static User getUser(String username) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		
@@ -54,6 +73,22 @@ public class DBManager {
 		session.close();	
 		
 		return user;
+	}
+	
+	public static MenuItem getMenuItem(String name) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		
+		Session session = sessionFactory.openSession();	
+		session.beginTransaction();
+		
+		Query<MenuItem> query=  session.createQuery("from MenuItem where name = '"+name+"'");
+
+		MenuItem item = (MenuItem) query.uniqueResult();
+		
+		session.getTransaction().commit();	
+		session.close();	
+		
+		return item;
 	}
 	
 	public static Restaurant getRestaurant() {
