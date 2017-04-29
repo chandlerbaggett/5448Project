@@ -63,7 +63,7 @@ public class StaffList extends Model {
 		while (iterator.hasNext()) {
 			StaffMember member = iterator.next();
 			
-			if (member.getUser().equals(user)) {
+			if (member.getUser().getId() == user.getId()) {
 				return member.getPermission();
 			}
 		}

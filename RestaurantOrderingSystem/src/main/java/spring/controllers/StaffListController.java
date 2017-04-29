@@ -17,14 +17,10 @@ import utils.DBManager;
 
 @Controller
 public class StaffListController {
-	//TODO access this from the restaurant
-	private StaffList staffList = new StaffList();
-
 	@GetMapping("/manageStaff")
 	public String loadPage(Model model) {
-		if (DBManager.getModel(User.class, 1) == null) {
-			buildTestData();
-		}
+		StaffList staffList = DBManager.getRestaurant().getStaff();
+		
 		model.addAttribute("lists", staffList.getStaffMembers());
 		return "manageStaff";
 	}
@@ -46,14 +42,6 @@ public class StaffListController {
 		}
 		
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/manageStaff/"));
-	}
-	
-	private void buildTestData() {
-		createStaffAccount("steve", "");
-		createStaffAccount("greg", "");
-		createStaffAccount("sven", "");
-		
-		createAdminAccount("tom", "");
 	}
 	
 	public User createStaffAccount(String userName, String password) {
@@ -90,11 +78,15 @@ public class StaffListController {
 	}
 	
 	private void  addStaffMember(User user, Permission permission) {
+		StaffList staffList = DBManager.getRestaurant().getStaff();
+		
 		staffList.addStaffMember(user, permission);
 		DBManager.saveModel(staffList);
 	}
 	
 	public void removeStaffMember(User user) {
+		StaffList staffList = DBManager.getRestaurant().getStaff();
+		
 		for (StaffMember member : staffList.getStaffMembers()) {
 			if (member.getUser().getId() == user.getId()) {
 				user = member.getUser();

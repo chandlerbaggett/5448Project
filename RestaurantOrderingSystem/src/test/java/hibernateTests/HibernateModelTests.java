@@ -8,6 +8,7 @@ import spring.models.MenuItem;
 import spring.models.OrderHistory;
 import spring.models.OrderItem;
 import spring.models.Permission;
+import spring.models.RealRestaurant;
 import spring.models.StaffList;
 import spring.models.StaffMember;
 import spring.models.User;
@@ -23,6 +24,17 @@ public class hibernateModelTests {
 	   User r = DBManager.getUser("steve");
 		
 	   ModelVerifier.verifyUsers(s, r);
+   }
+   
+   @Test
+   public void testRestaurantModel() {
+	   RealRestaurant restaurant1 = ModelBuilder.buildRestaurant();
+	   
+	   DBManager.saveModel(restaurant1);
+	   
+	   RealRestaurant restaurant2 = (RealRestaurant) DBManager.getModel(RealRestaurant.class, restaurant1.getId());
+	   
+	   ModelVerifier.verifyRestaurants(restaurant1, restaurant2);
    }
    
    @Test

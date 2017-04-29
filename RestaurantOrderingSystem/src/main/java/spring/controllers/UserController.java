@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import spring.config.AuthenticationService;
 import spring.formModels.CreateUser;
 import spring.models.OrderHistory;
 import spring.models.User;
 import utils.DBManager;
+import utils.TestDataBuilder;
 
 @Controller
 public class UserController {
@@ -22,17 +22,12 @@ public class UserController {
 	
 	@GetMapping("/createAccount")
 	public String loadCreateAccount(Model model) {
-		//TODO make user and save to db
-		//TODO login to created account
 		return "createAccount";
 	}
 	
 	@PostMapping("/createAccount")
 	public ModelAndView createAccount(CreateUser user, Model model) {
-		//TODO make user and save to db
 		//TODO login to created account
-		
-		
 		User staffUser = new User();
 		staffUser.setUserName(user.getUserName());
 		staffUser.setPassword(user.getPassword());
@@ -42,7 +37,7 @@ public class UserController {
 		
 		DBManager.saveModel(staffUser);
 		
-		//add confirmation message to model
+		//TODO add confirmation message to model
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/home/"));
 	}
 	

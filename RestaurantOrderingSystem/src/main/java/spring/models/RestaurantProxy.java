@@ -9,8 +9,7 @@ public class RestaurantProxy implements Restaurant {
 	}
 
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return restaurant.getName();
 	}
 
 	public void setName(String name) {
@@ -19,8 +18,7 @@ public class RestaurantProxy implements Restaurant {
 	}
 
 	public String getLocation() {
-		// TODO Auto-generated method stub
-		return null;
+		return restaurant.getLocation();
 	}
 
 	public void setLocation(String location) {
@@ -29,8 +27,7 @@ public class RestaurantProxy implements Restaurant {
 	}
 
 	public Menu getMenu() {
-		// TODO Auto-generated method stub
-		return null;
+		return restaurant.getMenu();
 	}
 
 	public void setMenu(Menu menu) {
@@ -39,17 +36,14 @@ public class RestaurantProxy implements Restaurant {
 	}
 
 	public StaffList getStaff() {
-		// TODO Auto-generated method stub
-		return null;
+		return restaurant.getStaff();
 	}
 
 	public void setStaff(StaffList staffList) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public boolean isOpen() {
-		// TODO Auto-generated method stub
 		return restaurant.isOpen();
 	}
 
@@ -63,6 +57,5 @@ public class RestaurantProxy implements Restaurant {
 
 	public void setOrders(OrderHistory orderHistory) {
 		restaurant.setOrders(orderHistory);
-		
 	}
 }
