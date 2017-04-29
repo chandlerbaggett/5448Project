@@ -3,6 +3,10 @@ package spring.controllers;
 import spring.models.Menu;
 import spring.models.MenuItem;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.ui.Model;
+
+@Controller
 public class MenuController {
 
 	private Menu menu;
