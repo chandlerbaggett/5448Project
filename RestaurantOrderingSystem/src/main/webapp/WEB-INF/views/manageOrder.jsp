@@ -30,11 +30,13 @@
 			<th>Order Id</th>
 			<th>Order Date</th>
 			<th>Order Status</th>
+			<th>Order Total</th>
 		</tr>
 		<tr>
 			<td>${order.getOrderId()}</td>
 			<td>${order.getOrderDate()}</td>
-			<td>${order.getOrderStatus()}</td>							
+			<td>${order.getOrderStatus()}</td>	
+			<td>${order.calculateOrderTotal()}</td>						
 		</tr>
 	</table>
 	<table>
@@ -48,9 +50,9 @@
 					<td>${listValue.getMenuItem().getName()}</td>
 					<td>${listValue.getQuantity()}</td>
 					<td>
-						<form action="/RestaurantOrderingSystem/manageOrder/remove" method = "POST" th:object="${orderItem}">
+						<form action="/RestaurantOrderingSystem/manageOrder/remove" th:object="${orderItem}" method = "post" >
 							<input name="submittype" type="submit" value="Remove" />
-							<input type="hidden" name="id" value="${listValue.getId()}" />
+							<input type="hidden" name="id" value="${listValue.getId()}" />	
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						</form>
 					</td>

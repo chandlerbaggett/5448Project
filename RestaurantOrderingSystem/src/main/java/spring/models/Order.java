@@ -39,34 +39,41 @@ public class Order extends Model implements Cloneable{
 		this.orderId = orderId;
 	}
 	
-	public void addItem(OrderItem orderItem){
-		
+	public OrderItem addItem(MenuItem menuItem){		
 		this.setOrderItems(orderItems);
-		if(orderItems.contains(orderItem)){
+		OrderItem orderItem = new OrderItem(menuItem);
+		if(orderItems.contains(orderItem)){		
+		//if(orderItems.contains(orderItem)){
 			int itemIndex = orderItems.indexOf(orderItem);
 			int itemQuantity = orderItems.get(itemIndex).getQuantity();
 			orderItems.get(itemIndex).setQuantity(itemQuantity+1);
-			
-			//or
-			//orderItems.get(orderItems.indexOf(orderItem)).setQuantity(orderItems.get(orderItems.indexOf(orderItem)).getQuantity()+1);
+			orderItem = orderItems.get(itemIndex);
 		}
 		else{
 			orderItems.add(orderItem);
 		}
-		
+		return orderItem;
 	}
 	
 	public void removeItem(OrderItem orderItem){
 		this.setOrderItems(orderItems);
+		//System.out.println("OrderItem is "+orderItem.getMenuItem().getName());
+		for(OrderItem i: orderItems){
+			//System.out.println("OrderItems has "+i.getMenuItem().getName());
+		}
 		if(orderItems.contains(orderItem)){
+			//System.out.println("OrderItems contains "+orderItem);
 			int itemIndex = orderItems.indexOf(orderItem);
+			//System.out.println("Index is "+itemIndex);
 			int itemQuantity = orderItems.get(itemIndex).getQuantity();
-			
+			//System.out.println("Item Quantity is "+itemQuantity);
 			if(itemQuantity > 1){
 				orderItems.get(itemIndex).setQuantity(itemQuantity-1);
+				//System.out.println("Item Quantity is > 1 ");
 			}
 			else{
 				orderItems.remove(orderItem);
+				//System.out.println("Item Quantity is <= 1 ");
 			}
 			
 		}
@@ -117,9 +124,7 @@ public class Order extends Model implements Cloneable{
 		clone.setorderId(this.orderId);
 		clone.setOrderDate(this.orderDate);
 		clone.setOrderStatus(this.orderStatus);
-		for(OrderItem item : this.orderItems){
-			clone.addItem(item);
-		}
+		clone.setOrderItems(this.getOrderItems());
 		
 		return clone;
 	}

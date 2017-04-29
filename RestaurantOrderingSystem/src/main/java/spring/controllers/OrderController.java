@@ -46,7 +46,7 @@ public class OrderController {
 		order = createOrder();
 		//myOrder.setorderId(105);
 		addToOrder(new MenuItem("Free Chips and Salsa", "Free Chips and Salsa Appetizer", 0.00,null));
-		//myOrder.addItem(new OrderItem(new MenuItem("Hamburger", "Juicy Hamburger on a Sesame Seed Bun", 9.99,null)));
+		restaurant = DBManager.getRestaurant();
 		restaurant.setIsOpen(true);
 	}
 	
@@ -108,27 +108,40 @@ public class OrderController {
 
 	@PostMapping("/manageOrder/add")
 	public ModelAndView add(CreateOrderItem orderItem, Model model){
-		MenuItem item = new MenuItem(orderItem.getDescription(),orderItem.getDescription() , 3.99, null);
-		addToOrder(item);		
+		MenuItem menuItem;	
+		if (DBManager.getMenuItem(orderItem.getDescription()) == null){
+			menuItem = new MenuItem(orderItem.getDescription(),orderItem.getDescription() , 3.99, null);
+		}
+		else{
+			menuItem = DBManager.getMenuItem(orderItem.getDescription());
+		}
+		
+		addToOrder(menuItem);		
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/manageOrder/"));
 	}		
 	public void addToOrder(MenuItem menuItem){
-		OrderItem orderItem = new OrderItem(menuItem);
-		order.addItem(orderItem);
+		OrderItem orderItem = order.addItem(menuItem);
+		DBManager.saveModel(menuItem);	
 		DBManager.saveModel(orderItem);
 		DBManager.saveModel(order);
-		
 	}
 
 	@PostMapping("/manageOrder/remove")
-	public ModelAndView remove(OrderItem orderItem, Model model){
-		removeFromOrder(orderItem);		
+	public ModelAndView remove(int id, Model model){
+	//public ModelAndView remove(OrderItem orderItem, Model model){
+		OrderItem orderItem = (OrderItem) DBManager.getModel(OrderItem.class, id);
+		System.out.println("Calling removeFromOrder on "+orderItem);
+		removeFromOrder(orderItem);	
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/manageOrder/"));
 	}		
 	public void removeFromOrder(OrderItem orderItem){
+		int itemIndex = order.getOrderItems().indexOf(orderItem);
+		int itemQuantity = order.getOrderItems().get(itemIndex).getQuantity();
+		if(itemQuantity <= 1){	
+			DBManager.deleteModel(orderItem);
+		}
 		order.removeItem(orderItem);
 		//DBManager.saveModel(orderItem.getMenuItem());
-		DBManager.saveModel(orderItem);
 		DBManager.saveModel(order);
 	}
 	

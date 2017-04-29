@@ -17,8 +17,8 @@ public class MenuItem extends Model{
 	
 	private double price;
 	
-	@Transient
-	private Image image;
+	//@Transient
+	//private Image image;
 
 	public MenuItem() {
 		
@@ -28,7 +28,7 @@ public class MenuItem extends Model{
 		this.name = name;
 		this.description = descroption;
 		this.price = price;
-		this.image = image;
+		//this.image = image;
 	}
 
 	public String getName() {
@@ -55,13 +55,36 @@ public class MenuItem extends Model{
 		this.price = price;
 	}
 
-	public Image getImage() {
+	/*public Image getImage() {
 		return image;
 	}
 
 	public void setImage(Image image) {
 		this.image = image;
-	}
+	}*/
 		
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MenuItem other = (MenuItem) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
 }
