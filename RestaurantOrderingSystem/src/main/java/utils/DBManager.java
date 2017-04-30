@@ -121,13 +121,13 @@ public class DBManager {
 		return getUser(authentication.getName());
 	}
 
-	public static Order getOrder() {
+	public static Order getActiveOrder() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		
 		Session session = sessionFactory.openSession();	
 		session.beginTransaction();
 		
-		Query<Order> query=  session.createQuery("from Order ");
+		Query<Order> query=  session.createQuery("from Order where orderStatus = 'ACTIVE'");
 
 		Order order = (Order) query.uniqueResult();
 		

@@ -35,8 +35,11 @@ public class OrderController {
 		restaurant = DBManager.getRestaurant();
 		restaurant.setIsOpen(true);
 		
-		if (DBManager.getOrder() == null || !DBManager.getOrder().getOrderStatus().equals("ACTIVE")){
+		if (DBManager.getActiveOrder() == null || !DBManager.getActiveOrder().getOrderStatus().equals("ACTIVE")){
 			buildBasicOrder();
+		}
+		else{
+			order = DBManager.getActiveOrder();
 		}
 		model.addAttribute("order", order);
 		model.addAttribute("items", order.getOrderItems() );
@@ -95,7 +98,6 @@ public class OrderController {
 	public void saveOrder(){		
 		orderMemento = order.createMemento();
 		DBManager.saveModel(order);
-		System.out.println("Saving order");
 	}
 	
 	@PostMapping("/manageOrder/resume")
@@ -108,9 +110,9 @@ public class OrderController {
 	}		
 	public Order resumeOrder(){		
 		
-		for(OrderItem item: order.getOrderItems()){
+		/*for(OrderItem item: order.getOrderItems()){
 			DBManager.deleteModel(item);
-		}
+		}*/ //don't delete OrderItems manually when cascadetype is ALL from Order to OrderItem
 		order.setMemento(orderMemento);//restore from memento
 		return order;
 	}
