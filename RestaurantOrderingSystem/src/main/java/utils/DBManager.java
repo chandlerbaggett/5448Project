@@ -120,20 +120,4 @@ public class DBManager {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return getUser(authentication.getName());
 	}
-
-	public static Order getActiveOrder() {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		
-		Session session = sessionFactory.openSession();	
-		session.beginTransaction();
-		
-		Query<Order> query=  session.createQuery("from Order where orderStatus = 'ACTIVE'");
-
-		Order order = (Order) query.uniqueResult();
-		
-		session.getTransaction().commit();	
-		session.close();
-		
-		return order;
-	}
 }

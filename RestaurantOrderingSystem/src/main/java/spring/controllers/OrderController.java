@@ -2,6 +2,7 @@ package spring.controllers;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,11 +36,13 @@ public class OrderController {
 		restaurant = DBManager.getRestaurant();
 		restaurant.setIsOpen(true);
 		
-		if (DBManager.getActiveOrder() == null || !DBManager.getActiveOrder().getOrderStatus().equals("ACTIVE")){
+		OrderHistory history = DBManager.getLoggedInUser().getOrderHistory();
+		Set<Order> orders = history.getOrdersByStatus("ACTIVE");
+		if (orders.size() == 0){
 			buildBasicOrder();
 		}
 		else{
-			order = DBManager.getActiveOrder();
+			order = orders.iterator().next();
 		}
 		model.addAttribute("order", order);
 		model.addAttribute("items", order.getOrderItems() );
