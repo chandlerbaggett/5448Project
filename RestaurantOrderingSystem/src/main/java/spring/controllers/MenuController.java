@@ -5,7 +5,7 @@ import spring.models.MenuItem;
 import utils.DBManager;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.ui.Model;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,7 +41,10 @@ public class MenuController {
 	}
 
 	@PostMapping("/viewMenu/remove")
-	public ModelAndView removeMenuItem(menuItem 
+	public ModelAndView removeMenuItem(removeMenuItem menuItem, Model model){
+		removeMenuItem(menuItem.getMenuItem());
+		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/viewMenu/"));
+	} 
 
 	public void addItem(MenuItem item){
 		menu.addMenuItem(item);
@@ -51,7 +54,11 @@ public class MenuController {
 	public void removeItem(MenuItem item){
 		Menu menu = DBManager.getRestaurant().getMenu();
 
-		for (
+		for (MenuItem item : menu.getMenuItem()){
+			if (item.getMenuItem().getId() == item.getId()) {
+				item = item.getMenuItem();
+			}
+		}
 		menu.removeMenuItem(item);
 		DBManager.saveModel(menu);
 	}
