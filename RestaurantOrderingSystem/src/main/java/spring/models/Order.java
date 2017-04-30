@@ -1,5 +1,6 @@
 package spring.models;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,6 +87,10 @@ public class Order extends Model implements Cloneable{
 	
 	public long getOrderDate() {
 		return orderDate;
+	}
+	
+	public Date getFormattedDate() {
+		return new Date(orderDate);
 	}
 
 	public void setOrderDate(long orderDate) {

@@ -59,7 +59,7 @@ public class TestDataBuilder {
 	
 	public static Order buildOrder() {
 		Order subOrder1 = new Order();
-		subOrder1.setOrderDate(5l);
+		subOrder1.setOrderDate(System.currentTimeMillis());
 		subOrder1.setorderId(5);
 		subOrder1.setOrderStatus("stuff");
 
@@ -84,6 +84,7 @@ public class TestDataBuilder {
 		item.setName(name);
 		item.setPrice(price);
 		item.setDescroption(name+price);
+		DBManager.saveModel(item);
 		
 		return item;
 	}
