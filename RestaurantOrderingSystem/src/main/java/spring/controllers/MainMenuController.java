@@ -18,8 +18,8 @@ public class MainMenuController {
 			System.out.println("have permission");
 			model.addAttribute("showPlacedOrders", permission.canViewRestaurantOrders());
 			model.addAttribute("showPlaceOrder", permission.canMakeOrders());
-			model.addAttribute("showEditMenu", permission.canEditRestaurantMenu());
-			model.addAttribute("showManageStaff", permission.canEditRestaurantStaff());
+			model.addAttribute("showEditMenu", permission.canManageRestaurant());
+			model.addAttribute("showManageStaff", permission.canManageRestaurant());
 			
 		} else {
 			System.out.println("no permission");

@@ -56,11 +56,11 @@ public class TestDataBuilder {
 		StaffList staff = new StaffList();
 		
 		User staffUser = buildStaffUser();
-		Permission staffPermission = new Permission(false, true, false, false);
+		Permission staffPermission = new Permission(false, true, false);
 		staff.addStaffMember(staffUser, staffPermission);
 		
 		User adminUser = buildAdminUser();
-		Permission adminPermission = new Permission(false, true, true, true);
+		Permission adminPermission = new Permission(false, true, true);
 		staff.addStaffMember(adminUser, adminPermission);
 		
 		DBManager.saveModel(staff);

@@ -58,7 +58,6 @@ public class ModelVerifier {
 		assertEquals("names should be equal", item1.getName(), item2.getName());
 		assertEquals("descriptions should be equal", item1.getDescroption(), item2.getDescroption());
 		assertTrue("prices should be equal", item1.getPrice() == item2.getPrice());
-		assertEquals("images should be the same", item1.getImage(), item2.getImage());
 	}
 
 	public static void verifyStaffMembers(StaffMember member, StaffMember member2) {
@@ -68,8 +67,7 @@ public class ModelVerifier {
 	}
 
 	public static void verifyPermissions(Permission permission, Permission permission2) {
-		assertTrue("permissions should match", permission.canEditRestaurantMenu() == permission2.canEditRestaurantMenu());
-		assertTrue("permissions should match", permission.canEditRestaurantStaff() == permission2.canEditRestaurantStaff());
+		assertTrue("permissions should match", permission.canManageRestaurant() == permission2.canManageRestaurant());
 		assertTrue("permissions should match", permission.canMakeOrders() == permission2.canMakeOrders());
 		assertTrue("permissions should match", permission.canViewRestaurantOrders() == permission2.canViewRestaurantOrders());		
 	}

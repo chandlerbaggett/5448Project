@@ -6,20 +6,17 @@ import javax.persistence.Embeddable;
 public class Permission {
 	private boolean canMakeOrders;
 	private boolean canViewRestaurantOrders;
-	private boolean canEditRestaurantStaff;
-	private boolean canEditRestaurantMenu;
+	private boolean canManageRestaurant;
 	
 	public Permission() {
 		super();
 	}
 
-	public Permission(boolean canMakeOrders, boolean canViewRestaurantOrders, boolean canEditRestaurantStaff,
-			boolean canEditRestaurantMenu) {
+	public Permission(boolean canMakeOrders, boolean canViewRestaurantOrders, boolean canEditRestaurantStaff) {
 		super();
 		this.canMakeOrders = canMakeOrders;
 		this.canViewRestaurantOrders = canViewRestaurantOrders;
-		this.canEditRestaurantStaff = canEditRestaurantStaff;
-		this.canEditRestaurantMenu = canEditRestaurantMenu;
+		this.canManageRestaurant = canEditRestaurantStaff;
 	}
 
 	public boolean canMakeOrders() {
@@ -30,11 +27,7 @@ public class Permission {
 		return canViewRestaurantOrders;
 	}
 	
-	public boolean canEditRestaurantStaff() {
-		return canEditRestaurantStaff;
-	}
-	
-	public boolean canEditRestaurantMenu() {
-		return canEditRestaurantMenu;
+	public boolean canManageRestaurant() {
+		return canManageRestaurant;
 	}
 }

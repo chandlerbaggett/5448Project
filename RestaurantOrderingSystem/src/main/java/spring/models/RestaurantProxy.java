@@ -1,5 +1,7 @@
 package spring.models;
 
+import utils.DBManager;
+
 public class RestaurantProxy implements Restaurant {
 	private RealRestaurant restaurant = new RealRestaurant();
 
@@ -13,8 +15,9 @@ public class RestaurantProxy implements Restaurant {
 	}
 
 	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
+		if (canManageRestaurant()) {
+			restaurant.setName(name);
+		}		
 	}
 
 	public String getLocation() {
@@ -22,8 +25,9 @@ public class RestaurantProxy implements Restaurant {
 	}
 
 	public void setLocation(String location) {
-		// TODO Auto-generated method stub
-		
+		if (canManageRestaurant()) {
+			restaurant.setLocation(location);
+		}
 	}
 
 	public Menu getMenu() {
@@ -31,16 +35,23 @@ public class RestaurantProxy implements Restaurant {
 	}
 
 	public void setMenu(Menu menu) {
-		// TODO Auto-generated method stub
-		
+		if (canManageRestaurant()) {
+			restaurant.setMenu(menu);
+		}
 	}
 
 	public StaffList getStaff() {
-		return restaurant.getStaff();
+		if (canManageRestaurant()) {
+			return restaurant.getStaff();
+		}
+		
+		return null;
 	}
 
 	public void setStaff(StaffList staffList) {
-		// TODO Auto-generated method stub
+		if (canManageRestaurant()) {
+			restaurant.setStaff(staffList);
+		}
 	}
 
 	public boolean isOpen() {
@@ -48,7 +59,9 @@ public class RestaurantProxy implements Restaurant {
 	}
 
 	public void setIsOpen(boolean isOpen) {
-		restaurant.setIsOpen(isOpen);
+		if (canManageRestaurant()) {
+			restaurant.setIsOpen(isOpen);
+		}
 	}
 
 	public OrderHistory getOrders() {
@@ -56,6 +69,20 @@ public class RestaurantProxy implements Restaurant {
 	}
 
 	public void setOrders(OrderHistory orderHistory) {
-		restaurant.setOrders(orderHistory);
+		if (canManageRestaurant()) {
+			restaurant.setOrders(orderHistory);
+		}
+	}
+	
+	private boolean canManageRestaurant() {
+		User requestingUser = DBManager.getLoggedInUser();
+		
+		Permission permission = restaurant.getStaff().getPermissionForStaff(requestingUser);
+		
+		if (permission != null) {
+			return permission.canManageRestaurant();
+		}
+		
+		return false;
 	}
 }

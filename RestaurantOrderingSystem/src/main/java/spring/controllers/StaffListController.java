@@ -46,22 +46,19 @@ public class StaffListController {
 	
 	public User createStaffAccount(String userName, String password) {
 		boolean canViewOrders = true;
-		boolean canEditStaff = false;
-		boolean canEditMenu = false;
+		boolean canManageRestaurant = false;
 		
-		return buildUser(userName, password, canViewOrders, canEditStaff, canEditMenu);
+		return buildUser(userName, password, canViewOrders, canManageRestaurant);
 	}
 
 	public User createAdminAccount(String userName, String password) {
 		boolean canViewOrders = true;
-		boolean canEditStaff = true;
-		boolean canEditMenu = true;
+		boolean canManageRestaurant = true;
 				
-		return buildUser(userName, password, canViewOrders, canEditStaff, canEditMenu);
+		return buildUser(userName, password, canViewOrders, canManageRestaurant);
 	}
 	
-	private User buildUser(String userName, String password, boolean canViewOrders, boolean canEditStaff,
-			boolean canEditMenu) {
+	private User buildUser(String userName, String password, boolean canViewOrders, boolean canManageRestaurant) {
 		User staffUser = new User();
 		staffUser.setUserName(userName);
 		staffUser.setPassword(password);
@@ -71,7 +68,7 @@ public class StaffListController {
 		
 		DBManager.saveModel(staffUser);
 		
-		Permission permission = new Permission(false, canViewOrders, canEditStaff, canEditMenu);
+		Permission permission = new Permission(false, canViewOrders, canManageRestaurant);
 		addStaffMember(staffUser, permission);
 		
 		return staffUser;
