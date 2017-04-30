@@ -93,8 +93,7 @@ public class OrderController {
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/manageOrder/"));
 	}		
 	public void saveOrder(){		
-		OrderMemento memento = new OrderMemento(order.getOrderId(),order.getOrderDate(), order.getOrderStatus(), order.getOrderItems());
-		orderMemento = memento;
+		orderMemento = order.createMemento();
 		DBManager.saveModel(order);
 		System.out.println("Saving order");
 	}
