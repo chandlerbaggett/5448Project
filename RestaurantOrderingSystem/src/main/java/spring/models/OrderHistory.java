@@ -1,7 +1,8 @@
 package spring.models;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -13,18 +14,18 @@ import javax.persistence.Table;
 @Table(name = "ORDER_HISTORIES")
 public class OrderHistory extends Model {
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-	private Collection<Order> orders;
+	private Set<Order> orders;
 	
 	public OrderHistory() {
 		super();
-		orders = new ArrayList<Order>();
+		orders = new HashSet<Order>();
 	}
 
 	public Collection<Order> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(Collection<Order> orders) {
+	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
 	}
 	
