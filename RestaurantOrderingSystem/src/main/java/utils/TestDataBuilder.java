@@ -3,7 +3,6 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import hibernateTests.utils.ModelBuilder;
 import spring.models.Menu;
 import spring.models.MenuItem;
 import spring.models.Order;
