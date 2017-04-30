@@ -54,8 +54,8 @@ public class MenuController {
 	public void removeItem(MenuItem item){
 		Menu menu = DBManager.getRestaurant().getMenu();
 
-		for (MenuItem item : menu){
-			if (item.getMenuItem().getId() == item.getId()) {
+		for (MenuItem item : Menu){
+			if (item.getId() == item.getId()) {
 				item = item.getMenuItem();
 			}
 		}
