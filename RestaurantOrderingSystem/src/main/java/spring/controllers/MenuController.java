@@ -15,23 +15,43 @@ import org.springframework.web.servlet.view.RedirectView;
 public class MenuController {
 
 	private Menu menu = new Menu();
-	
+
 	public void createMenu(){
 		this.menu = new Menu();	
 		DBManager.saveModel(menu);
 	}
 	
-	@GetMapping("/viewMenu")	
+	@GetMapping("/viewMenu")
+	public String loadPage(Model model) {
+		Menu menu = DBManager.getRestaurant().getMenu();
+
+		model.addAttribute("lists", menu.getMenu());
+
+		return "viewMenu";
+	}	
+
 	public Menu viewMenu(){		
 		return menu;
 	}
 	
+	@PostMapping("/viewMenu/add")
+	public ModelAndView addMenuItem(addMenuItem menuItem, Model model){
+		createMenuItem(menuItem.getMenuItem());
+		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/viewMenu/"));
+	}
+
+	@PostMapping("/viewMenu/remove")
+	public ModelAndView removeMenuItem(menuItem 
+
 	public void addItem(MenuItem item){
 		menu.addMenuItem(item);
 		DBManager.saveModel(menu)
 	}
 	
 	public void removeItem(MenuItem item){
+		Menu menu = DBManager.getRestaurant().getMenu();
+
+		for (
 		menu.removeMenuItem(item);
 		DBManager.saveModel(menu);
 	}
