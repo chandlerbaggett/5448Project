@@ -12,8 +12,6 @@ import javax.persistence.Transient;
 @Table(name = "ORDER_ITEMS")
 public class OrderItem extends Model {
 	
-	//@Transient
-	//@OneToOne(cascade = {CascadeType.ALL})
 	@OneToOne(fetch = FetchType.EAGER)
 	private MenuItem menuItem;
 	

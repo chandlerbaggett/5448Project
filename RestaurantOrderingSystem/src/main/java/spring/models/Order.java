@@ -15,7 +15,7 @@ public class Order extends Model implements Cloneable{
 	
 	private Integer orderId;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private List<OrderItem> orderItems;
 	
 	private String orderStatus;
@@ -43,7 +43,6 @@ public class Order extends Model implements Cloneable{
 		this.setOrderItems(orderItems);
 		OrderItem orderItem = new OrderItem(menuItem);
 		if(orderItems.contains(orderItem)){		
-		//if(orderItems.contains(orderItem)){
 			int itemIndex = orderItems.indexOf(orderItem);
 			int itemQuantity = orderItems.get(itemIndex).getQuantity();
 			orderItems.get(itemIndex).setQuantity(itemQuantity+1);
@@ -57,23 +56,15 @@ public class Order extends Model implements Cloneable{
 	
 	public void removeItem(OrderItem orderItem){
 		this.setOrderItems(orderItems);
-		//System.out.println("OrderItem is "+orderItem.getMenuItem().getName());
-		for(OrderItem i: orderItems){
-			//System.out.println("OrderItems has "+i.getMenuItem().getName());
-		}
+		
 		if(orderItems.contains(orderItem)){
-			//System.out.println("OrderItems contains "+orderItem);
 			int itemIndex = orderItems.indexOf(orderItem);
-			//System.out.println("Index is "+itemIndex);
 			int itemQuantity = orderItems.get(itemIndex).getQuantity();
-			//System.out.println("Item Quantity is "+itemQuantity);
 			if(itemQuantity > 1){
 				orderItems.get(itemIndex).setQuantity(itemQuantity-1);
-				//System.out.println("Item Quantity is > 1 ");
 			}
 			else{
 				orderItems.remove(orderItem);
-				//System.out.println("Item Quantity is <= 1 ");
 			}
 			
 		}
@@ -108,15 +99,22 @@ public class Order extends Model implements Cloneable{
 	
 	//save
 	public OrderMemento createMemento(){
-		return new OrderMemento(this);
+		return new OrderMemento(this.orderId, this.orderDate, this.orderStatus, this.orderItems);
 	}
 	
 	//restore
 	public void setMemento(OrderMemento memento){
-		this.orderId = memento.getOrder().getOrderId();
-		this.orderDate = memento.getOrder().getOrderDate();
-		this.orderStatus = memento.getOrder().getOrderStatus();
-		this.orderItems = memento.getOrder().getOrderItems();
+		this.orderId = memento.getOrderId();
+		this.orderDate = memento.getOrderDate();
+		this.orderStatus = memento.getOrderStatus();
+		List<OrderItem> newList = new ArrayList<OrderItem>();
+		for(OrderItem item: memento.getOrderItems()){
+			OrderItem newItem = new OrderItem();
+			newItem.setMenuItem(item.getMenuItem());
+			newItem.setQuantity(item.getQuantity());
+			newList.add(newItem);
+		}
+		this.orderItems = newList;
 	}
 	
 	public Order clone(){

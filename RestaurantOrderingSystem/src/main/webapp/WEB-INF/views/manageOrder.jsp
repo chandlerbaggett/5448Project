@@ -24,7 +24,17 @@
 	 	<p><input type="submit" value="Cancel Order" /></p>
 	 	<input type="hidden" name="id" value="${order.getId()}" />
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    </form>       
+    </form>    
+    <form action="/RestaurantOrderingSystem/manageOrder/save" th:object="${order}" method="post">
+	 	<p><input type="submit" value="Save Order" /></p>
+	 	<input type="hidden" name="id" value="${order.getId()}" />
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    </form>  
+    <form action="/RestaurantOrderingSystem/manageOrder/resume" th:object="${order}" method="post">
+	 	<p><input type="submit" value="Restore Order to Last Save" /></p>
+	 	<input type="hidden" name="id" value="${order.getId()}" />
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    </form>      
 	<table>
 		<tr>
 			<th>Order Id</th>
