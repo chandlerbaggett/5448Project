@@ -27,7 +27,6 @@ public class UserController {
 	
 	@PostMapping("/createAccount")
 	public ModelAndView createAccount(CreateUser user, Model model) {
-		//TODO login to created account
 		User staffUser = new User();
 		staffUser.setUserName(user.getUserName());
 		staffUser.setPassword(user.getPassword());
@@ -37,7 +36,6 @@ public class UserController {
 		
 		DBManager.saveModel(staffUser);
 		
-		//TODO add confirmation message to model
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/home/"));
 	}
 	

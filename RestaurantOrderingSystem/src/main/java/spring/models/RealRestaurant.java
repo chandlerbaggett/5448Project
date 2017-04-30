@@ -12,7 +12,7 @@ public class RealRestaurant extends Model implements Restaurant {
 	private String name;
 	private String location;
 	
-	//TODO make real
+	//TODO finish when menu annotated
 	@Transient
 	private Menu menu;
 	

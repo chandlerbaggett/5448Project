@@ -24,7 +24,6 @@ public class ModelVerifier {
 		   assertEquals("passwords should match", user1.getPassword(), user2.getPassword());
 		   assertEquals("display names should match", user1.getDisplayName(), user2.getDisplayName());
 		   
-			//TODO enable when order histories are saved
 		   verifyOrderHistories(user1.getOrderHistory(), user2.getOrderHistory());
 	}
 	
@@ -117,13 +116,13 @@ public class ModelVerifier {
 		assertEquals("names should be equal", restaurant1.getName(), restaurant2.getName());
 		assertTrue("open status should be the same", restaurant1.isOpen() == restaurant2.isOpen());
 		
-		//TODO add when fully implemented
+		//TODO finish when menu annotated
 //		verifyMenus(restaurant1.getMenu(), restaurant2.getMenu());
 		verifyOrderHistories(restaurant1.getOrders(), restaurant2.getOrders());
 		verifyStaffLists(restaurant1.getStaff(), restaurant2.getStaff());
 	}
 	
 	public static void verifyMenus(Menu menu1, Menu menu2) {
-		//TODO when menu fully implemented
+		//TODO finish when menu annotated
 	}
 }
