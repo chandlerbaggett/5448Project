@@ -1,10 +1,15 @@
 package hibernateTests;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.junit.Test;
 
 import hibernateTests.utils.ModelBuilder;
 import hibernateTests.utils.ModelVerifier;
 import spring.models.MenuItem;
+import spring.models.Order;
 import spring.models.OrderHistory;
 import spring.models.OrderItem;
 import spring.models.Permission;
@@ -92,5 +97,27 @@ public class hibernateModelTests {
 	   OrderItem item2 = (OrderItem) DBManager.getModel(OrderItem.class, item1.getId());
 	   
 	   ModelVerifier.verifyOrderItems(item1, item2);   
+   }
+   
+   @Test
+   public void testOrderModel() {
+	   Order order1 = new Order();
+	   Date date = new Date();
+	   date.setTime(System.currentTimeMillis());
+	   order1.setOrderDate(5l);
+	   order1.setorderId(5);
+	   order1.setOrderStatus("stuff");
+	   
+	   List<OrderItem> items = new ArrayList<OrderItem>();
+	   items.add(ModelBuilder.buildOrderItem(ModelBuilder.buildMenuItem("pizza", 10), 6));
+	   items.add(ModelBuilder.buildOrderItem(ModelBuilder.buildMenuItem("burger", 5), 2));
+	   items.add(ModelBuilder.buildOrderItem(ModelBuilder.buildMenuItem("shake", 1), 3));
+	   order1.setOrderItems(items);
+	   
+	   DBManager.saveModel(order1);
+	   
+	   Order order2 = (Order) DBManager.getModel(Order.class, order1.getId());
+	   
+	   ModelVerifier.verifyOrders(order1, order2);
    }
 }
