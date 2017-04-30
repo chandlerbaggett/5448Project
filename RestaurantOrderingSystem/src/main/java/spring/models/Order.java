@@ -15,9 +15,9 @@ import javax.persistence.Table;
 @Table(name = "ORDERS")
 public class Order extends Model implements Cloneable{
 	
-	private Integer orderId;
+	private Integer orderId = 500;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval=true)
 	private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 	
 	private String orderStatus = "ACTIVE";

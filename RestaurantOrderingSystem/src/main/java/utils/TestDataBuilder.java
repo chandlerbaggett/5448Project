@@ -61,7 +61,7 @@ public class TestDataBuilder {
 		Order subOrder1 = new Order();
 		subOrder1.setOrderDate(System.currentTimeMillis());
 		subOrder1.setorderId(5);
-		subOrder1.setOrderStatus("stuff");
+		subOrder1.setOrderStatus("COMPLETED");
 
 		List<OrderItem> items1 = new ArrayList<OrderItem>();
 		items1.add(buildOrderItem(buildMenuItem("pizza", 10), 6));
