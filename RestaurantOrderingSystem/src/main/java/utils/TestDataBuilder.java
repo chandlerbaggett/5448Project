@@ -107,7 +107,7 @@ public class TestDataBuilder {
 
 	private static Menu buildBaseMenu() {
 		Menu menu = new Menu();
-		//TODO finish when order history annotated
+		//TODO finish when menu annotated
 //		DBManager.saveModel(menu);
 		
 		return menu;

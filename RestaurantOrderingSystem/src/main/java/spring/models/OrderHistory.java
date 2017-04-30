@@ -2,6 +2,7 @@ package spring.models;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -29,8 +30,15 @@ public class OrderHistory extends Model {
 	}
 	
 	public Set<Order> getOrdersByStatus(String status) {
-		//TODO filter based on status
-		return orders;
+		Set<Order> tempSet = new HashSet<Order>();
+		tempSet.addAll(orders);
+		tempSet.removeIf(new Predicate<Order>() {
+			@Override
+			public boolean test(Order order) {
+				return !order.getOrderStatus().equals(status);
+			}
+		});
+		return tempSet;
 	}
 	
 	public void addOrder(Order order) {
