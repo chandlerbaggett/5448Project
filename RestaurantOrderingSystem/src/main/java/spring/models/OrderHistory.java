@@ -1,6 +1,5 @@
 package spring.models;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +20,7 @@ public class OrderHistory extends Model {
 		orders = new HashSet<Order>();
 	}
 
-	public Collection<Order> getOrders() {
+	public Set<Order> getOrders() {
 		return orders;
 	}
 
@@ -29,7 +28,7 @@ public class OrderHistory extends Model {
 		this.orders = orders;
 	}
 	
-	public Collection<Order> getOrdersByStatus(String status) {
+	public Set<Order> getOrdersByStatus(String status) {
 		//TODO filter based on status
 		return orders;
 	}

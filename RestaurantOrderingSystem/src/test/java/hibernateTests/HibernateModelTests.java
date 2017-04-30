@@ -24,7 +24,7 @@ public class hibernateModelTests {
    public void testUserModel() {
 	   OrderHistory history = ModelBuilder.buildOrderHistory();
 	   
-	   User s = ModelBuilder.buildUser("steve", "", history);
+	   User s = ModelBuilder.buildUser("steve", "");
 	   DBManager.saveModel(s);
 	   User r = DBManager.getUser("steve");
 		
@@ -45,7 +45,7 @@ public class hibernateModelTests {
    @Test
    public void testStaffMemberModel() {
 	   OrderHistory history = ModelBuilder.buildOrderHistory();
-	   User user = ModelBuilder.buildUser("greg", "", history);
+	   User user = ModelBuilder.buildUser("greg", "");
 	   Permission permission = ModelBuilder.buildPermission();
 	   
 	   StaffMember member = ModelBuilder.buildStaffMember(user, permission);
@@ -62,7 +62,7 @@ public class hibernateModelTests {
 	   
 	   for (int x=0; x < 3; x++) {
 		   OrderHistory history = ModelBuilder.buildOrderHistory();
-		   User user = ModelBuilder.buildUser("greg"+x, "", history);
+		   User user = ModelBuilder.buildUser("greg"+x, "");
 		   Permission permission = ModelBuilder.buildPermission();
 		   
 		   list1.addStaffMember(user, permission);

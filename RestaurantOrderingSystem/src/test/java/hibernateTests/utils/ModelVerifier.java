@@ -3,6 +3,9 @@ package hibernateTests.utils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 import spring.models.Menu;
 import spring.models.MenuItem;
 import spring.models.Order;
@@ -29,9 +32,20 @@ public class ModelVerifier {
 		assertTrue("ids should be equal", o1.getId() == o2.getId());
 		assertEquals("num orders should be the same", o1.getOrders().size(), o2.getOrders().size());
 		
-		for (int x=0; x < o1.getOrders().size(); x++) {
-			verifyOrders(o1.getOrders().toArray(new Order[0])[x],
-						 o2.getOrders().toArray(new Order[0])[x]);
+		Order[] orders1 = o1.getOrders().toArray(new Order[0]);
+		Order[] orders2 = o2.getOrders().toArray(new Order[0]);
+		Comparator<Order> sort = new Comparator<Order>() {
+			@Override
+			public int compare(Order o1, Order o2) {
+				return o1.getId()-o2.getId();
+			}	
+		};
+		
+		Arrays.sort(orders1, sort);
+		Arrays.sort(orders2, sort);
+		
+		for (int x=0; x < orders1.length; x++) {
+			verifyOrders(orders1[x], orders2[x]);
 		}
 	}
 	
