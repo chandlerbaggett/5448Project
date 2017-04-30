@@ -34,10 +34,10 @@ public class ModelBuilder {
 		StaffList list = buildStaffList();
 		
 		OrderHistory staffHistory = buildOrderHistory();
-		list.addStaffMember(buildUser("staff", "pass", staffHistory), new Permission(false, true, false, false));
+		list.addStaffMember(buildUser("staff", "pass", staffHistory), new Permission(false, true, false));
 		
 		OrderHistory adminHistory = buildOrderHistory();
-		list.addStaffMember(buildUser("admin", "pass", adminHistory), new Permission(false, true, true, true));
+		list.addStaffMember(buildUser("admin", "pass", adminHistory), new Permission(false, true, true));
 		
 		restaurant.setStaff(list);
 		
@@ -61,7 +61,7 @@ public class ModelBuilder {
 	}
 	
 	public static Permission buildPermission() {
-		return new Permission(false, true, false, false);
+		return new Permission(false, true, false);
 	}
 	
 	public static StaffMember buildStaffMember(User user, Permission permission) {
