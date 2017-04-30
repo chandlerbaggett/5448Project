@@ -26,11 +26,12 @@ public class ModelVerifier {
 	}
 	
 	public static void verifyOrderHistories(OrderHistory o1, OrderHistory o2) {
-		assertEquals("num orders should be the same", o1.getAllOrders().size(), o2.getAllOrders().size());
+		assertTrue("ids should be equal", o1.getId() == o2.getId());
+		assertEquals("num orders should be the same", o1.getOrders().size(), o2.getOrders().size());
 		
-		for (int x=0; x < o1.getAllOrders().size(); x++) {
-			verifyOrders(o1.getAllOrders().toArray(new Order[0])[x],
-						 o2.getAllOrders().toArray(new Order[0])[x]);
+		for (int x=0; x < o1.getOrders().size(); x++) {
+			verifyOrders(o1.getOrders().toArray(new Order[0])[x],
+						 o2.getOrders().toArray(new Order[0])[x]);
 		}
 	}
 	
@@ -43,7 +44,7 @@ public class ModelVerifier {
 	public static void verifyOrders(Order order1, Order order2) {
 		assertTrue("ids should be equal", order1.getId() == order2.getId());
 		assertEquals("order status should be the same", order1.getOrderStatus(), order2.getOrderStatus());
-		assertEquals("order date should be the same", order1.getOrderDate(), order2.getOrderDate());
+		assertTrue(order1.getOrderDate() == order2.getOrderDate());
 		
 		assertTrue("num order items should be the same", order1.getOrderItems().size() == order2.getOrderItems().size());
 		

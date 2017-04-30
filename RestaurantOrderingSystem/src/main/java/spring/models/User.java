@@ -1,8 +1,8 @@
 package spring.models;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "USERS")
@@ -11,9 +11,8 @@ public class User extends Model {
 	private String userName;
 	private String password;
 	
-	@Embedded
+	@Transient
 	private OrderHistory orderHistory;
-	
 	
 	public User() {
 		super();

@@ -1,18 +1,16 @@
 package spring.models;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "ORDER_ITEMS")
 public class OrderItem extends Model {
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	private MenuItem menuItem;
 	
 	private int quantity = 1;

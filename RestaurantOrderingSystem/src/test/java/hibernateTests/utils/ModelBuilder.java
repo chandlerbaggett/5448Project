@@ -2,7 +2,6 @@ package hibernateTests.utils;
 
 import spring.models.Menu;
 import spring.models.MenuItem;
-import spring.models.Order;
 import spring.models.OrderHistory;
 import spring.models.OrderItem;
 import spring.models.Permission;

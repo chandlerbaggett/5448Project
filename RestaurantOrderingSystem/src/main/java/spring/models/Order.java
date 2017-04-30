@@ -1,12 +1,13 @@
 package spring.models;
 
-import java.util.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 @Entity
@@ -15,20 +16,14 @@ public class Order extends Model implements Cloneable{
 	
 	private Integer orderId;
 	
-	@OneToMany(cascade = {CascadeType.ALL})
-	private List<OrderItem> orderItems;
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 	
-	private String orderStatus;
+	private String orderStatus = "ACTIVE";
 	
-	private Date orderDate;
+	private long orderDate;
 	
 	public Order(){
-		Random rand = new Random();
-		this.orderId = 0 + rand.nextInt((500 - 0) + 1);
-		this.orderItems = new ArrayList<OrderItem>();
-		this.setOrderItems(orderItems);
-		orderStatus = "ACTIVE";
-		orderDate = Calendar.getInstance().getTime();
 	}
 	
 	public int getOrderId(){
@@ -89,14 +84,14 @@ public class Order extends Model implements Cloneable{
 		this.orderStatus = status;
 	}
 	
-	public Date getOrderDate(){
+	public long getOrderDate() {
 		return orderDate;
 	}
-	
-	public void setOrderDate(Date orderDate){
+
+	public void setOrderDate(long orderDate) {
 		this.orderDate = orderDate;
 	}
-	
+
 	//save
 	public OrderMemento createMemento(){
 		return new OrderMemento(this.orderId, this.orderDate, this.orderStatus, this.orderItems);
@@ -140,5 +135,4 @@ public class Order extends Model implements Cloneable{
 	public void  setOrderItems(List<OrderItem> orderItems){
 		this.orderItems = orderItems;
 	}	
-
 }
