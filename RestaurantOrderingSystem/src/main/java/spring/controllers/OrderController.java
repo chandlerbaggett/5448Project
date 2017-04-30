@@ -156,10 +156,16 @@ public class OrderController {
 		return order.calculateOrderTotal();
 	}
 	
+
+	@PostMapping("/manageOrder/duplicate")
+	public ModelAndView duplicate(){
+		order = duplicateOrder();		
+		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/manageOrder/"));
+	}	
 	public Order duplicateOrder(){
 		Order duplicate = order.clone();
-		order.setOrderStatus("Active");
-		DBManager.saveModel(order);
+		duplicate.setOrderStatus("ACTIVE");
+		DBManager.saveModel(duplicate);
 		return duplicate;
 	}
 	

@@ -122,8 +122,14 @@ public class Order extends Model implements Cloneable{
 		clone.setorderId(this.orderId);
 		clone.setOrderDate(this.orderDate);
 		clone.setOrderStatus(this.orderStatus);
-		clone.setOrderItems(this.getOrderItems());
-		
+		List<OrderItem> newList = new ArrayList<OrderItem>();
+		for(OrderItem item: this.getOrderItems()){
+			OrderItem newItem = new OrderItem();
+			newItem.setMenuItem(item.getMenuItem());
+			newItem.setQuantity(item.getQuantity());
+			newList.add(newItem);
+		}
+		clone.setOrderItems(newList);		
 		return clone;
 	}
 	
