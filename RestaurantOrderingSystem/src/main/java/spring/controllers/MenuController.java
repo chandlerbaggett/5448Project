@@ -1,15 +1,11 @@
 package spring.controllers;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import spring.models.Menu;
 import spring.models.MenuItem;
 import utils.DBManager;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class MenuController {
@@ -28,7 +24,7 @@ public class MenuController {
 	
 	public void addItem(MenuItem item){
 		menu.addMenuItem(item);
-		DBManager.saveModel(menu)
+		DBManager.saveModel(menu);
 	}
 	
 	public void removeItem(MenuItem item){
