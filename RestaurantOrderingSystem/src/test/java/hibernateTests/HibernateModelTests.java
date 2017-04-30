@@ -19,7 +19,7 @@ import spring.models.StaffMember;
 import spring.models.User;
 import utils.DBManager;
 
-public class hibernateModelTests {
+public class HibernateModelTests {
    @Test
    public void testUserModel() {
 	   OrderHistory history = ModelBuilder.buildOrderHistory();
