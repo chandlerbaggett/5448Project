@@ -1,16 +1,15 @@
 package spring.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ORDER_ITEMS")
 public class OrderItem extends Model {
 	
-	@OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@ManyToOne(fetch = FetchType.EAGER)
 	private MenuItem menuItem;
 	
 	private int quantity = 1;

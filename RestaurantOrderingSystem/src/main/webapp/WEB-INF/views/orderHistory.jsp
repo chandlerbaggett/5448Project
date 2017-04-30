@@ -6,25 +6,47 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Order history</title>
 </head>
+<style>
+	table, th, td {
+    	border: 1px solid black;
+	}
+</style>
 <body>
+	<c:if test="${isRestaurant}">
+		<h1>Placed Orders</h1>
+	</c:if>
+	<c:if test="${!isRestaurant}">
+		<h1>Your order history</h1>
+	</c:if>
+	
 <table>
 		<tr>
 			<th>Order id</th>
-			<th>time stamp</th>
+			<th>order date</th>
+			<th>status</th>
 			<th>total</th>
 		</tr>
 		<c:if test="${not empty orders}">
 			<c:forEach var="order" items="${orders}">
 				<tr>
 					<td>${order.getId()}</td>
-					<td>${order.getOrderDate()}</td>
+					<td>${order.getFormattedDate()}</td>
+					<td>${order.getOrderStatus()}</td>
 					<td>${order.calculateOrderTotal()}</td>
 					<c:if test="${isRestaurant}">
 						<td>
 							<form action="/RestaurantOrderingSystem/order/complete" method = "POST">
-								<input name="submittype" type="submit" value="remove" />
+								<input name="submittype" type="submit" value="mark complete" />
+								<input type="hidden" name="id" value="${order.getId()}" />
+							</form>
+						</td>
+					</c:if>
+					<c:if test="${!isRestaurant}">
+						<td>
+							<form action="/RestaurantOrderingSystem/order/duplicate" method = "POST">
+								<input name="submittype" type="submit" value="resubmit" />
 								<input type="hidden" name="id" value="${order.getId()}" />
 							</form>
 						</td>
