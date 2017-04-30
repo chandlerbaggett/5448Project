@@ -2,6 +2,7 @@ package spring.controllers;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,8 +36,13 @@ public class OrderController {
 		restaurant = DBManager.getRestaurant();
 		restaurant.setIsOpen(true);
 		
-		if (DBManager.getOrder() == null || !DBManager.getOrder().getOrderStatus().equals("ACTIVE")){
+		OrderHistory history = DBManager.getLoggedInUser().getOrderHistory();
+		Set<Order> orders = history.getOrdersByStatus("ACTIVE");
+		if (orders.size() == 0){
 			buildBasicOrder();
+		}
+		else{
+			order = orders.iterator().next();
 		}
 		model.addAttribute("order", order);
 		model.addAttribute("items", order.getOrderItems() );
@@ -95,7 +101,6 @@ public class OrderController {
 	public void saveOrder(){		
 		orderMemento = order.createMemento();
 		DBManager.saveModel(order);
-		System.out.println("Saving order");
 	}
 	
 	@PostMapping("/manageOrder/resume")
@@ -108,9 +113,9 @@ public class OrderController {
 	}		
 	public Order resumeOrder(){		
 		
-		for(OrderItem item: order.getOrderItems()){
+		/*for(OrderItem item: order.getOrderItems()){
 			DBManager.deleteModel(item);
-		}
+		}*/ //don't delete OrderItems manually when cascadetype is ALL from Order to OrderItem
 		order.setMemento(orderMemento);//restore from memento
 		return order;
 	}
