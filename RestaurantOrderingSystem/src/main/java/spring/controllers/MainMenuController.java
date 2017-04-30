@@ -12,7 +12,11 @@ import utils.TestDataBuilder;
 public class MainMenuController {
 	@GetMapping("/home")
 	public String home(Model model) {
-		Permission permission = DBManager.getRestaurant().getStaff().getPermissionForStaff(DBManager.getLoggedInUser());
+		Permission permission = null;
+		
+		if (DBManager.getRestaurant().getStaff() != null) {
+			permission = DBManager.getRestaurant().getStaff().getPermissionForStaff(DBManager.getLoggedInUser());	
+		}
 		
 		if (permission != null) {
 			System.out.println("have permission");
