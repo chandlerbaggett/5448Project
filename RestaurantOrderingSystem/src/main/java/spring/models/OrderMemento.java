@@ -1,12 +1,7 @@
 package spring.models;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
 
 public class OrderMemento {
 
@@ -16,9 +11,9 @@ public class OrderMemento {
 	
 	private String orderStatus;
 	
-	private Date orderDate;
+	private long orderDate;
 
-	public OrderMemento(Integer orderId, Date orderDate, String orderStatus, List<OrderItem> orderItems) {
+	public OrderMemento(Integer orderId, long orderDate, String orderStatus, List<OrderItem> orderItems) {
 		super();
 		this.orderId = orderId;
 		this.orderDate = orderDate;
@@ -60,11 +55,11 @@ public class OrderMemento {
 		this.orderStatus = orderStatus;
 	}
 
-	public Date getOrderDate() {
+	public long getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(long orderDate) {
 		this.orderDate = orderDate;
 	}
 
