@@ -1,7 +1,14 @@
 package utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import hibernateTests.utils.ModelBuilder;
 import spring.models.Menu;
+import spring.models.MenuItem;
+import spring.models.Order;
 import spring.models.OrderHistory;
+import spring.models.OrderItem;
 import spring.models.Permission;
 import spring.models.RealRestaurant;
 import spring.models.StaffList;
@@ -45,11 +52,41 @@ public class TestDataBuilder {
 
 	private static OrderHistory buildBaseOrderHstory() {
 		OrderHistory history = new OrderHistory();
-		
-		//TODO finish when order history annotated
-//		DBManager.saveModel(history);
+		history.addOrder(buildOrder());
+		history.addOrder(buildOrder());
 		
 		return history;
+	}
+	
+	public static Order buildOrder() {
+		Order subOrder1 = new Order();
+		subOrder1.setOrderDate(5l);
+		subOrder1.setorderId(5);
+		subOrder1.setOrderStatus("stuff");
+
+		List<OrderItem> items1 = new ArrayList<OrderItem>();
+		items1.add(buildOrderItem(buildMenuItem("pizza", 10), 6));
+		items1.add(buildOrderItem(buildMenuItem("burger", 4), 2));
+		subOrder1.setOrderItems(items1);
+		
+		return subOrder1;
+	}
+
+	public static OrderItem buildOrderItem(MenuItem menuItem, int quantity) {
+		OrderItem item = new OrderItem();
+		item.setQuantity(quantity);
+		item.setMenuItem(menuItem);
+		
+		return item;
+	}
+	
+	public static MenuItem buildMenuItem(String name, double price) {
+		MenuItem item = new MenuItem();
+		item.setName(name);
+		item.setPrice(price);
+		item.setDescroption(name+price);
+		
+		return item;
 	}
 
 	private static StaffList buildBaseStaffList() {

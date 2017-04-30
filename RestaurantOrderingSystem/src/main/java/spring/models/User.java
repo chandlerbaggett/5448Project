@@ -1,8 +1,9 @@
 package spring.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "USERS")
@@ -11,7 +12,7 @@ public class User extends Model {
 	private String userName;
 	private String password;
 	
-	@Transient
+	@OneToOne(cascade = {CascadeType.ALL})
 	private OrderHistory orderHistory;
 	
 	public User() {
