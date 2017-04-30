@@ -43,7 +43,7 @@ public class ModelVerifier {
 	public static void verifyOrders(Order order1, Order order2) {
 		assertTrue("ids should be equal", order1.getId() == order2.getId());
 		assertEquals("order status should be the same", order1.getOrderStatus(), order2.getOrderStatus());
-		assertEquals("order date should be the same", order1.getOrderDate(), order2.getOrderDate());
+		assertTrue(order1.getOrderDate() == order2.getOrderDate());
 		
 		assertTrue("num order items should be the same", order1.getOrderItems().size() == order2.getOrderItems().size());
 		
