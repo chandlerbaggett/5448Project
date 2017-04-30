@@ -56,8 +56,9 @@ public class OrderController {
 	
 	public Order createOrder(){
 		this.order = new Order();		
-		//OrderHistory orderHistory = customer.getOrderHistory();
-		//orderHistory.addOrder(order);	
+		OrderHistory history = DBManager.getLoggedInUser().getOrderHistory();
+		history.addOrder(order);	
+		DBManager.saveModel(history);
 		return order;
 	}
 	
@@ -135,7 +136,7 @@ public class OrderController {
 	}		
 	public void addToOrder(MenuItem menuItem){
 		OrderItem orderItem = order.addItem(menuItem);
-		DBManager.saveModel(menuItem);	
+		DBManager.saveModel(menuItem);
 		DBManager.saveModel(order);
 	}
 
@@ -149,9 +150,9 @@ public class OrderController {
 	public void removeFromOrder(OrderItem orderItem){
 		int itemIndex = order.getOrderItems().indexOf(orderItem);
 		int itemQuantity = order.getOrderItems().get(itemIndex).getQuantity();
-		if(itemQuantity <= 1){	
+		/*if(itemQuantity <= 1){	
 			DBManager.deleteModel(orderItem);
-		}
+		}*///don't delete OrderItems manually when cascadetype is ALL from Order to OrderItem
 		order.removeItem(orderItem);
 		DBManager.saveModel(order);
 	}

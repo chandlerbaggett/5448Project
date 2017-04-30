@@ -29,11 +29,11 @@ public class OrderHistory extends Model {
 		this.orders = orders;
 	}
 	
-	public Set<Order> getOrdersByStatus(String status) {
+	public Set<Order> getOrdersByStatus(final String status) {
 		Set<Order> tempSet = new HashSet<Order>();
 		tempSet.addAll(orders);
 		tempSet.removeIf(new Predicate<Order>() {
-			@Override
+			
 			public boolean test(Order order) {
 				return !order.getOrderStatus().equals(status);
 			}
