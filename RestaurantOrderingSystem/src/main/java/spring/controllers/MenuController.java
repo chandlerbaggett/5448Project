@@ -25,7 +25,7 @@ public class MenuController {
 	public String loadPage(Model model) {
 		Menu menu = DBManager.getRestaurant().getMenu();
 
-		model.addAttribute("lists", menu.getMenu());
+		model.addAttribute("lists", menu);
 
 		return "viewMenu";
 	}	
@@ -36,13 +36,13 @@ public class MenuController {
 	
 	@PostMapping("/viewMenu/add")
 	public ModelAndView addMenuItem(addMenuItem menuItem, Model model){
-		createMenuItem(menuItem.getMenuItem());
+		createMenuItem(menuItem);
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/viewMenu/"));
 	}
 
 	@PostMapping("/viewMenu/remove")
 	public ModelAndView removeMenuItem(removeMenuItem menuItem, Model model){
-		removeMenuItem(menuItem.getMenuItem());
+		removeMenuItem(menuItem);
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/viewMenu/"));
 	} 
 
@@ -54,7 +54,7 @@ public class MenuController {
 	public void removeItem(MenuItem item){
 		Menu menu = DBManager.getRestaurant().getMenu();
 
-		for (MenuItem item : menu.getMenuItem()){
+		for (MenuItem item : menu){
 			if (item.getMenuItem().getId() == item.getId()) {
 				item = item.getMenuItem();
 			}
