@@ -1,5 +1,7 @@
 package spring.controllers;
 
+import spring.formModels.AddMenuItem;
+import spring.formModels.EditMenuItem;
 import spring.formModels.RemoveMenuItem;
 import spring.models.Menu;
 import spring.models.MenuItem;
