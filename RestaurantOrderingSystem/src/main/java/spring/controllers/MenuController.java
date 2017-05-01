@@ -36,13 +36,13 @@ public class MenuController {
 	}
 	
 	@PostMapping("/viewMenu/add")
-	public ModelAndView addMenuItem(addMenuItem menuItem, Model model){
+	public ModelAndView AddMenuItem(addMenuItem menuItem, Model model){
 		createMenuItem(menuItem);
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/viewMenu/"));
 	}
 
 	@PostMapping("/viewMenu/remove")
-	public ModelAndView removeMenuItem(RemoveMenuItem menuItem, Model model){
+	public ModelAndView RemoveMenuItem(RemoveMenuItem menuItem, Model model){
 		removeItem(menuItem);
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/viewMenu/"));
 	} 
