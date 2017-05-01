@@ -37,7 +37,7 @@ public class MenuController {
 	
 	@PostMapping("/viewMenu/add")
 	public ModelAndView AddMenuItem(addMenuItem menuItem, Model model){
-		createMenuItem(menuItem);
+		addItem(menuItem);
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/viewMenu/"));
 	}
 
@@ -46,6 +46,12 @@ public class MenuController {
 		removeItem(menuItem);
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/viewMenu/"));
 	} 
+
+	@PostMapping("/viewMenu/edit")
+	public ModelAndView EditMenuItem(EditMenuItem menuItem, Model model){
+		editItem(menuItem);
+		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/viewMenu/"));
+	}
 
 	public void addItem(AddMenuItem item){
 		Menu menu = DBManager.getRestaurant().getMenu();
