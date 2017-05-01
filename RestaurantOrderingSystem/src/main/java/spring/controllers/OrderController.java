@@ -69,15 +69,15 @@ public class OrderController {
 	}
 	
 	public void submitOrder(){
-		restaurant.setIsOpen(true);
 		if (restaurant.isOpen()){
 			order.setOrderStatus("SUBMITTED");
 			DBManager.saveModel(order);
-			OrderHistory orderHistory = restaurant.getOrders();
+			OrderHistory orderHistory = DBManager.getRestaurant().getOrders();
 			if(orderHistory == null){
 				orderHistory = new OrderHistory();
 			}
 			orderHistory.addOrder(order);
+			DBManager.saveModel(orderHistory);
 		}
 		else{
 			System.out.println("Restaurant is currently closed. Order not submitted.");

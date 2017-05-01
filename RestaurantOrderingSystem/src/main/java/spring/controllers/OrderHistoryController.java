@@ -36,7 +36,7 @@ public class OrderHistoryController {
 	public ModelAndView markOrderCompleted(Order order, Model model){
 		order = (Order) DBManager.getModel(Order.class, order.getId());
 		
-		order.setOrderStatus("Completed");
+		order.setOrderStatus("COMPLETED");
 		DBManager.saveModel(order);
 		
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/restaurant_order_history"));
@@ -47,7 +47,7 @@ public class OrderHistoryController {
 		order = (Order) DBManager.getModel(Order.class, order.getId());
 		
 		Order newOrder = order.clone();
-		newOrder.setOrderStatus("in progress");
+		newOrder.setOrderStatus("SUBMITTED");
 		DBManager.saveModel(newOrder);
 		
 		OrderHistory history = DBManager.getLoggedInUser().getOrderHistory();
