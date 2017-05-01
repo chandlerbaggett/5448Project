@@ -56,7 +56,7 @@ public class MenuController {
 
 		for (MenuItem loopedItem : menu.getMenuItems()){
 			if (loopedItem.getId() == item.getId()) {
-				item.removeMenuItem(loopedItem);
+				menu.removeMenuItem(loopedItem);
 			}
 		}
 		DBManager.saveModel(menu);
