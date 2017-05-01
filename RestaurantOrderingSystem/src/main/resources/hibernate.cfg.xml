@@ -47,6 +47,7 @@
  <mapping class="spring.models.StaffMember"/>
  <mapping class="spring.models.RealRestaurant"/>
  <mapping class="spring.models.MenuItem"/>
+ <mapping class="spring.models.Menu"/>
  
 </session-factory>
 
