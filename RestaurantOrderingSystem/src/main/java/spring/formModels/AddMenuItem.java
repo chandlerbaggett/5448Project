@@ -1,16 +1,16 @@
 package spring.formModels;
 
 public class AddMenuItem{
-	private int id;
+	private int name;
 	private int price;
 	private String description;
 
-	public int getId(){
-		return id;
+	public String getName(){
+		return name;
 	}
 	
-	public void setId(int id){
-		this.id = id;
+	public void setName(String name){
+		this.name = name;
 	}
 
 	public int getPrice(){
