@@ -42,14 +42,15 @@ public class MenuController {
 	}
 
 	@PostMapping("/viewMenu/remove")
-	public ModelAndView removeMenuItem(removeMenuItem menuItem, Model model){
+	public ModelAndView removeMenuItem(RemoveMenuItem menuItem, Model model){
 		removeItem(menuItem);
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/viewMenu/"));
 	} 
 
-	public void addItem(MenuItem item){
+	public void addItem(AddMenuItem item){
+		Menu menu = DBManager.getRestaurant().getMenu();
 		menu.addMenuItem(item);
-		DBManager.saveModel(menu)
+		DBManager.saveModel(menu);
 	}
 	
 	public void removeItem(RemoveMenuItem item){
@@ -63,8 +64,16 @@ public class MenuController {
 		DBManager.saveModel(menu);
 	}
 	
-	public void editMenuItem(MenuItem item){
-		//TO DO
+	public void editMenuItem(EditMenuItem item){
+
+		Menu menu = DBManager.getRestaurant().getMenu();
+
+		for (MenuItem loopedItem : menu.getMenuItems()){
+			if (loopedItem.getId() == item.getId()){
+				menu.editMenuItem(loopedItem);
+			}
+		}
+		DBManager.saveModel(menu);
 	}	
 	
 	
