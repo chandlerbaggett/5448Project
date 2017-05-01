@@ -34,7 +34,7 @@ public class ModelVerifier {
 		Order[] orders1 = o1.getOrders().toArray(new Order[0]);
 		Order[] orders2 = o2.getOrders().toArray(new Order[0]);
 		Comparator<Order> sort = new Comparator<Order>() {
-			@Override
+			
 			public int compare(Order o1, Order o2) {
 				return o1.getId()-o2.getId();
 			}	
@@ -96,7 +96,6 @@ public class ModelVerifier {
 		
 		Comparator<StaffMember> sort = new Comparator<StaffMember>() {
 			
-			@Override
 			public int compare(StaffMember o1, StaffMember o2) {
 				return o1.getId()-o2.getId();
 			}

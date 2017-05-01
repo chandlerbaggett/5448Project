@@ -51,6 +51,7 @@ public class OrderController {
 	
 	private void buildBasicOrder(){
 		order = createOrder();
+		order.setOrderDate(System.currentTimeMillis());
 		addToOrder(new MenuItem("Free Chips and Salsa", "Free Chips and Salsa Appetizer", 0.00,null));
 	}
 	
