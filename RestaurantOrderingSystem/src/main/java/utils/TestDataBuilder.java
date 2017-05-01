@@ -105,11 +105,10 @@ public class TestDataBuilder {
 		return staff;
 	}
 
-	private static Menu buildBaseMenu() {
+	public static Menu buildBaseMenu() {
 		Menu menu = new Menu();
-		//TODO finish when menu annotated
-//		DBManager.saveModel(menu);
-		
+		menu.addMenuItem(buildMenuItem("burger", 1));
+		menu.addMenuItem(buildMenuItem("pizza", 2));
 		return menu;
 	}
 	

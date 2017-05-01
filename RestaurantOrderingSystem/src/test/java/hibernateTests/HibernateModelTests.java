@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import hibernateTests.utils.ModelBuilder;
 import hibernateTests.utils.ModelVerifier;
+import spring.models.Menu;
 import spring.models.MenuItem;
 import spring.models.Order;
 import spring.models.OrderHistory;
@@ -73,6 +74,17 @@ public class HibernateModelTests {
 	   StaffList list2 = (StaffList) DBManager.getModel(StaffList.class, list1.getId());
 	   
 	   ModelVerifier.verifyStaffLists(list1, list2);
+   }
+   
+   @Test
+   public void testMenuModel() {
+	   Menu menu1 = ModelBuilder.buildMenu();
+	   
+	   DBManager.saveModel(menu1);
+	   
+	   Menu menu2 = (Menu) DBManager.getModel(Menu.class, menu1.getId());
+	   
+	   ModelVerifier.verifyMenus(menu1,  menu2);
    }
    
    @Test

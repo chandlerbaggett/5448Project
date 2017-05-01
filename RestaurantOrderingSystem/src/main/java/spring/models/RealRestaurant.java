@@ -12,8 +12,7 @@ public class RealRestaurant extends Model implements Restaurant {
 	private String name;
 	private String location;
 	
-	//TODO finish when menu annotated
-	@Transient
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Menu menu;
 	
 	@OneToOne(cascade = {CascadeType.ALL})

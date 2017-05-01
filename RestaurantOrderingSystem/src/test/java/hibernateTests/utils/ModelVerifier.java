@@ -115,13 +115,29 @@ public class ModelVerifier {
 		assertEquals("names should be equal", restaurant1.getName(), restaurant2.getName());
 		assertTrue("open status should be the same", restaurant1.isOpen() == restaurant2.isOpen());
 		
-		//TODO finish when menu annotated
-//		verifyMenus(restaurant1.getMenu(), restaurant2.getMenu());
+		verifyMenus(restaurant1.getMenu(), restaurant2.getMenu());
 		verifyOrderHistories(restaurant1.getOrders(), restaurant2.getOrders());
 		verifyStaffLists(restaurant1.getStaff(), restaurant2.getStaff());
 	}
 	
 	public static void verifyMenus(Menu menu1, Menu menu2) {
-		//TODO finish when menu annotated
+		assertEquals("menu size should be equal", menu1.getMenuItems().size(), menu2.getMenuItems().size());
+		
+		MenuItem[] items1 = menu1.getMenuItems().toArray(new MenuItem[0]);
+		MenuItem[] items2 = menu2.getMenuItems().toArray(new MenuItem[0]);
+		
+		Comparator<MenuItem> sort = new Comparator<MenuItem>() {
+			
+			public int compare(MenuItem o1, MenuItem o2) {
+				return o1.getId()-o2.getId();
+			}
+		};
+		
+		Arrays.sort(items1, sort);
+		Arrays.sort(items2, sort);
+		
+		for (int x=0; x < items1.length; x++) {
+			verifyMenuItems(items1[x], items2[x]);
+		}
 	}
 }
