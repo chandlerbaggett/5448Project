@@ -59,7 +59,7 @@ public class MenuController {
 		Menu menu = DBManager.getRestaurant().getMenu();
 		MenuItem menuItem = new MenuItem();
 		menuItem.setName(item.getName());
-		menuItem.setDescription(item.getDescription());
+		menuItem.setDescroption(item.getDescription());
 		menuItem.setPrice(item.getPrice());	
 			
 		menu.addMenuItem(menuItem);
