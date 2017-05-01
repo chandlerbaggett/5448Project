@@ -18,4 +18,8 @@ public class Menu {
 	public void removeMenuItem(MenuItem menuItem) {
 		menuItems.remove(menuItem);
 	}
+
+	public Collection<MenuItem> getMenuItems() {
+		return menuItems;
+	}
 }
