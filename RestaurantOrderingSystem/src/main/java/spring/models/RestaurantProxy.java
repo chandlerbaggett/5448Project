@@ -41,11 +41,7 @@ public class RestaurantProxy implements Restaurant {
 	}
 
 	public StaffList getStaff() {
-		if (canManageRestaurant()) {
-			return restaurant.getStaff();
-		}
-		
-		return null;
+		return restaurant.getStaff();
 	}
 
 	public void setStaff(StaffList staffList) {

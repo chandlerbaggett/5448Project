@@ -12,11 +12,11 @@ public class Permission {
 		super();
 	}
 
-	public Permission(boolean canMakeOrders, boolean canViewRestaurantOrders, boolean canEditRestaurantStaff) {
+	public Permission(boolean canMakeOrders, boolean canViewRestaurantOrders, boolean canManageRestaurant) {
 		super();
 		this.canMakeOrders = canMakeOrders;
 		this.canViewRestaurantOrders = canViewRestaurantOrders;
-		this.canManageRestaurant = canEditRestaurantStaff;
+		this.canManageRestaurant = canManageRestaurant;
 	}
 
 	public boolean canMakeOrders() {
