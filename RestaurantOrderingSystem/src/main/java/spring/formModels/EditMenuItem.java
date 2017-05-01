@@ -1,0 +1,31 @@
+package spring.formModels;
+
+public class EditMenuItem{
+	private int id;
+	private int price;
+	private string description;
+
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
+
+	public int getPrice(){
+		return price;
+	}
+
+	public void setPrice(int price){
+		this.price=price;
+	}
+
+	public string getDescription(){
+		return description;
+	}
+
+	public void setDescription(string description){
+		this.description = description;
+	}
+}
