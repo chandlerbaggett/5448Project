@@ -17,15 +17,13 @@
 	<table>
 		<tr>
 			<th>Username</th>
-			<th>Can edit staff</th>
-			<th>Can edit menu</th>
+			<th>Can manage Restaurant</th>
 		</tr>
 		<c:if test="${not empty lists}">
 			<c:forEach var="listValue" items="${lists}">
 				<tr>
 					<td>${listValue.getUser().getDisplayName()}</td>
-					<td>${listValue.getPermission().canEditRestaurantStaff()}</td>
-					<td>${listValue.getPermission().canEditRestaurantMenu()}</td>
+					<td>${listValue.getPermission().canManageRestaurant()}</td>
 					<td>
 						<form action="/RestaurantOrderingSystem/manageStaff/remove" method = "POST" th:object="${user}">
 							<input name="submittype" type="submit" value="remove" />
