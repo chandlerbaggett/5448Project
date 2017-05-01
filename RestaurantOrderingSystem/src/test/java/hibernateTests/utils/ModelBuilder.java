@@ -103,6 +103,8 @@ public class ModelBuilder {
 		item.setPrice(price);
 		item.setDescroption(name+price);
 		
+		DBManager.saveModel(item);
+		
 		return item;
 	}
 
