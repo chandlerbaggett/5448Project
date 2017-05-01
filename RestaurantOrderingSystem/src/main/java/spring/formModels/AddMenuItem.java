@@ -1,7 +1,7 @@
 package spring.formModels;
 
 public class AddMenuItem{
-	private int name;
+	private String name;
 	private int price;
 	private String description;
 
