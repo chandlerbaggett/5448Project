@@ -1,5 +1,6 @@
 package spring.controllers;
 
+import spring.formModels.RemoveMenuItem;
 import spring.models.Menu;
 import spring.models.MenuItem;
 import utils.DBManager;
@@ -42,7 +43,7 @@ public class MenuController {
 
 	@PostMapping("/viewMenu/remove")
 	public ModelAndView removeMenuItem(removeMenuItem menuItem, Model model){
-		removeMenuItem(menuItem);
+		removeItem(menuItem);
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/viewMenu/"));
 	} 
 
@@ -51,7 +52,7 @@ public class MenuController {
 		DBManager.saveModel(menu)
 	}
 	
-	public void removeItem(MenuItem item){
+	public void removeItem(RemoveMenuItem item){
 		Menu menu = DBManager.getRestaurant().getMenu();
 
 		for (MenuItem loopedItem : menu.getMenuItems()){
