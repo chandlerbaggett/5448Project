@@ -40,7 +40,7 @@
 		</c:if>
 	</table>
 	
-	 <form action="/RestaurantOrderingSystem/viewMenu/add" th:object="${createUser}" method="post">
+	 <form action="/RestaurantOrderingSystem/viewMenu/add" th:object="${addItem}" method="post">
 	 	<p>Name:  <input type="text" name="name"/></p>
 	 	<p>Price:  <input type="text" name="price"/></p>
 	 	<p>Description: <input type="test" name="description"/></p>
