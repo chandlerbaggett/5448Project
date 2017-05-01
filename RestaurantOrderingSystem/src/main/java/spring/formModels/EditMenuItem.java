@@ -3,7 +3,7 @@ package spring.formModels;
 public class EditMenuItem{
 	private int id;
 	private int price;
-	private string description;
+	private String description;
 
 	public int getId(){
 		return id;
@@ -21,11 +21,11 @@ public class EditMenuItem{
 		this.price=price;
 	}
 
-	public string getDescription(){
+	public String getDescription(){
 		return description;
 	}
 
-	public void setDescription(string description){
+	public void setDescription(String description){
 		this.description = description;
 	}
 }
