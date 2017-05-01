@@ -78,13 +78,15 @@ public class MenuController {
 		DBManager.saveModel(menu);
 	}
 	
-	public void editMenuItem(EditMenuItem item){
+	public void editItem(EditMenuItem item){
 
 		Menu menu = DBManager.getRestaurant().getMenu();
 
 		for (MenuItem loopedItem : menu.getMenuItems()){
 			if (loopedItem.getId() == item.getId()){
-				menu.editMenuItem(loopedItem);
+				loopedItem.setName(item.getName());
+				loopedItem.setDescroption(item.getDescription());
+				loopedItem.setPrice(item.getPrice());
 			}
 		}
 		DBManager.saveModel(menu);
