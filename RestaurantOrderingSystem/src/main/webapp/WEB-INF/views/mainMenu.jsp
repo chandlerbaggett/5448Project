@@ -22,11 +22,15 @@
 	</c:if> 
 	
 	<c:if test="${showEditMenu}" >
-		<a href="/RestaurantOrderingSystem/home">Edit Menu</a><br/>
+		<a href="/RestaurantOrderingSystem/manageMenu">Edit Menu</a><br/>
+	</c:if> 
+	
+	<c:if test="${showPlaceOrder}" >
+		<a href="/RestaurantOrderingSystem/user_order_history">My Orders</a><br/>
 	</c:if> 
 	
 	<c:if test="${showPlacedOrders}" >
-		<a href="/RestaurantOrderingSystem/home">Placed Orders</a><br/>
+		<a href="/RestaurantOrderingSystem/restaurant_order_history">Placed Orders</a><br/>
 	</c:if> 
 	
 	 <form class="form-inline" action="/RestaurantOrderingSystem/logout" method="post">
