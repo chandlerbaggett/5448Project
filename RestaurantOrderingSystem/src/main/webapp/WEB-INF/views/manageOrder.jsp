@@ -43,8 +43,8 @@
 			<th>Order Total</th>
 		</tr>
 		<tr>
-			<td>${order.getOrderId()}</td>
-			<td>${order.getOrderDate()}</td>
+			<td>${order.getId()}</td>
+			<td>${order.getFormattedDate()}</td>
 			<td>${order.getOrderStatus()}</td>	
 			<td>${order.calculateOrderTotal()}</td>						
 		</tr>

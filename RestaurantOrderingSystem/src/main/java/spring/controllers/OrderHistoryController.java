@@ -47,7 +47,7 @@ public class OrderHistoryController {
 		order = (Order) DBManager.getModel(Order.class, order.getId());
 		
 		Order newOrder = order.clone();
-		newOrder.setOrderStatus("in progress");
+		newOrder.setOrderStatus("SUBMITTED");
 		DBManager.saveModel(newOrder);
 		
 		OrderHistory history = DBManager.getLoggedInUser().getOrderHistory();
