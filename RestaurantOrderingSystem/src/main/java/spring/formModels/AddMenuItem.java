@@ -9,7 +9,7 @@ public class AddMenuItem{
 		return id;
 	}
 	
-	public void setId(){
+	public void setId(int id){
 		this.id = id;
 	}
 
@@ -17,7 +17,7 @@ public class AddMenuItem{
 		return price;
 	}
 
-	public void setPrice(){
+	public void setPrice(int price){
 		this.price = price;
 	}
 
