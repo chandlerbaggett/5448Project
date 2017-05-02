@@ -75,7 +75,6 @@ public class MenuController {
 				itemToRemove = loopedItem;
 			}
 		}
-		menu.removeMenuItem(itemToRemove);
 		if (itemToRemove != null){
 			menu.removeMenuItem(itemToRemove);
 		}
