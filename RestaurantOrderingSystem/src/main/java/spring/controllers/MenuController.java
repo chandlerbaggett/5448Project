@@ -61,19 +61,22 @@ public class MenuController {
 		menuItem.setName(item.getName());
 		menuItem.setDescroption(item.getDescription());
 		menuItem.setPrice(item.getPrice());	
-		MenuItem itemToRemove = null;
 		menu.addMenuItem(menuItem);
 		DBManager.saveModel(menuItem);
 		DBManager.saveModel(menu);
 	}
 	
+	
 	public void removeItem(RemoveMenuItem item){
 		Menu menu = DBManager.getRestaurant().getMenu();
-
+		MenuItem itemToRemove = null;
 		for (MenuItem loopedItem : menu.getMenuItems()){
 			if (loopedItem.getId() == item.getId()) {
 				itemToRemove = loopedItem;
 			}
+		}
+		menu.removeMenuItem(itemToRemove);
+		if (itemToRemove != null){
 			menu.removeMenuItem(itemToRemove);
 		}
 		DBManager.saveModel(menu);
