@@ -28,7 +28,7 @@ public class MenuController {
 	public String loadPage(Model model) {
 		Menu menu = DBManager.getRestaurant().getMenu();
 
-		model.addAttribute("lists", menu);
+		model.addAttribute("lists", menu.getMenuItems());
 
 		return "viewMenu";
 	}	
