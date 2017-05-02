@@ -27,12 +27,10 @@
 					<td>${listValue.getMenuItem().getPrice()}</td>
 					<td>${listValue.getMenuItem().getDescroption()}</td>
 					<td>
-						<form action="/RestaurantOrderingSystem/viewMenu/remove" method = "POST" th:object="${item}">
-							<input name="submittype" type="submit" value="remove" />
-							<input name="hidden" name="id" value="${listValue.getMenuItem().getId()}" />
-							<input type="hidden" name="name" value="${listValue.getMenuItem().getName()}" />
-							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-						</form>
+						<form action="/RestaurantOrderingSystem/viewMenu/remove" th:object="${item}" method = "post" >
+						<input name="submittype" type="submit" value="Remove" />
+						<input type="hidden" name="id" value="${listValue.getId()}" />
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</td>
 				</tr>
 			</c:forEach>
