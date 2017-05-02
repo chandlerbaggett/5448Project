@@ -61,7 +61,7 @@ public class MenuController {
 		menuItem.setName(item.getName());
 		menuItem.setDescroption(item.getDescription());
 		menuItem.setPrice(item.getPrice());	
-			
+		MenuItem itemToRemove = null;
 		menu.addMenuItem(menuItem);
 		DBManager.saveModel(menuItem);
 		DBManager.saveModel(menu);
@@ -72,8 +72,9 @@ public class MenuController {
 
 		for (MenuItem loopedItem : menu.getMenuItems()){
 			if (loopedItem.getId() == item.getId()) {
-				menu.removeMenuItem(loopedItem);
+				itemToRemove = loopedItem;
 			}
+			menu.removeMenuItem(itemToRemove);
 		}
 		DBManager.saveModel(menu);
 	}
