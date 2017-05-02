@@ -30,7 +30,6 @@
 						<form action="/RestaurantOrderingSystem/viewMenu/remove" method = "POST" th:object="${item}">
 							<input name="submittype" type="submit" value="remove" />
 							<input name="hidden" name="id" value="${listValue.getId()}" />
-							<input type="hidden" name="name" value="${listValue.getName()}" />
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						</form>
 					</td>
