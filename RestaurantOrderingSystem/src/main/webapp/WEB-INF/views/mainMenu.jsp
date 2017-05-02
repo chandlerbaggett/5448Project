@@ -21,10 +21,6 @@
 		<a href="/RestaurantOrderingSystem/manageOrder">Start Order</a><br/>
 	</c:if> 
 	
-	<c:if test="${showEditMenu}" >
-		<a href="/RestaurantOrderingSystem/manageMenu">Edit Menu</a><br/>
-	</c:if> 
-	
 	<c:if test="${showPlaceOrder}" >
 		<a href="/RestaurantOrderingSystem/user_order_history">My Orders</a><br/>
 	</c:if> 

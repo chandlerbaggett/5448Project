@@ -83,14 +83,21 @@ public class DBManager {
 		Session session = sessionFactory.openSession();	
 		session.beginTransaction();
 		
+		
 		Query<MenuItem> query=  session.createQuery("from MenuItem where name = '"+name+"'");
 
-		MenuItem item = (MenuItem) query.uniqueResult();
+		query.setFirstResult(0);
+		query.setMaxResults(1);
+		List<MenuItem> itemList = query.list();
+		
+		if (itemList.size() == 0) {
+			return null;
+		}
 		
 		session.getTransaction().commit();	
 		session.close();	
 		
-		return item;
+		return itemList.get(0);
 	}
 	
 	public static Restaurant getRestaurant() {
