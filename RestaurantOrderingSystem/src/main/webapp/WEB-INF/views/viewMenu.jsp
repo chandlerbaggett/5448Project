@@ -23,7 +23,6 @@
 		<c:if test="${not empty lists}">
 			<c:forEach var="listValue" items="${lists}">
 				<tr>
-					<td>${listValue.getMenuItem().getId()}</td>
 					<td>${listValue.getMenuItem().getName()}</td>
 					<td>${listValue.getMenuItem().getPrice()}</td>
 					<td>${listValue.getMenuItem().getDescroption()}</td>
@@ -43,7 +42,7 @@
 	 <form action="/RestaurantOrderingSystem/viewMenu/add" th:object="${addItem}" method="post">
 	 	<p>Name:  <input type="text" name="name"/></p>
 	 	<p>Price:  <input type="text" name="price"/></p>
-	 	<p>Description: <input type="test" name="description"/></p>
+	 	<p>Description: <input type="text" name="description"/></p>
 	 	<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 	 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form>
