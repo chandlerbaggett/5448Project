@@ -83,7 +83,7 @@ public class TestDataBuilder {
 		MenuItem item = new MenuItem();
 		item.setName(name);
 		item.setPrice(price);
-		item.setDescroption(name+price);
+		item.setDescroption("a "+name);
 		DBManager.saveModel(item);
 		
 		return item;
