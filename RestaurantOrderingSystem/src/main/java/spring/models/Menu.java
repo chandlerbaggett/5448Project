@@ -1,14 +1,22 @@
 package spring.models;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Menu {
-	private Collection<MenuItem> menuItems;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "MENU")
+public class Menu extends Model {
+	@OneToMany(fetch = FetchType.EAGER)
+	private Set<MenuItem> menuItems;
 	
 	public Menu() {
 		super();
-		menuItems = new ArrayList<MenuItem>();
+		menuItems = new HashSet<MenuItem>();
 	}
 
 	public void addMenuItem(MenuItem menuItem) {
@@ -19,7 +27,11 @@ public class Menu {
 		menuItems.remove(menuItem);
 	}
 
-	public Collection<MenuItem> getMenuItems() {
+	public Set<MenuItem> getMenuItems() {
 		return menuItems;
+	}
+
+	public void setMenuItems(Set<MenuItem> menuItems) {
+		this.menuItems = menuItems;
 	}
 }

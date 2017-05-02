@@ -40,12 +40,14 @@
  <!-- <property name="hbm2ddl.auto">create</property> -->
  <property name="hibernate.hbm2ddl.auto">create</property> 
 
+ <mapping class="spring.models.OrderHistory"/>
  <mapping class="spring.models.Order"/>
  <mapping class="spring.models.OrderItem"/>
  <mapping class="spring.models.User"/>
  <mapping class="spring.models.StaffList"/>
  <mapping class="spring.models.StaffMember"/>
  <mapping class="spring.models.RealRestaurant"/>
+ <mapping class="spring.models.Menu"/>
  <mapping class="spring.models.MenuItem"/>
  <mapping class="spring.models.Menu"/>
  

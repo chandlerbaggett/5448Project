@@ -1,34 +1,30 @@
 package spring.models;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "ORDERS")
 public class Order extends Model implements Cloneable{
 	
-	private Integer orderId;
+	private Integer orderId = 500;
 	
-	@OneToMany
-	private List<OrderItem> orderItems;
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval=true)
+	private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 	
-	private String orderStatus;
+	private String orderStatus = "ACTIVE";
 	
-	private Date orderDate;
+	private long orderDate;
 	
 	public Order(){
-		Random rand = new Random();
-		this.orderId = 0 + rand.nextInt((500 - 0) + 1);
-		this.orderItems = new ArrayList<OrderItem>();
-		this.setOrderItems(orderItems);
-		orderStatus = "ACTIVE";
-		orderDate = Calendar.getInstance().getTime();
 	}
 	
 	public int getOrderId(){
@@ -43,7 +39,6 @@ public class Order extends Model implements Cloneable{
 		this.setOrderItems(orderItems);
 		OrderItem orderItem = new OrderItem(menuItem);
 		if(orderItems.contains(orderItem)){		
-		//if(orderItems.contains(orderItem)){
 			int itemIndex = orderItems.indexOf(orderItem);
 			int itemQuantity = orderItems.get(itemIndex).getQuantity();
 			orderItems.get(itemIndex).setQuantity(itemQuantity+1);
@@ -57,23 +52,15 @@ public class Order extends Model implements Cloneable{
 	
 	public void removeItem(OrderItem orderItem){
 		this.setOrderItems(orderItems);
-		//System.out.println("OrderItem is "+orderItem.getMenuItem().getName());
-		for(OrderItem i: orderItems){
-			//System.out.println("OrderItems has "+i.getMenuItem().getName());
-		}
+		
 		if(orderItems.contains(orderItem)){
-			//System.out.println("OrderItems contains "+orderItem);
 			int itemIndex = orderItems.indexOf(orderItem);
-			//System.out.println("Index is "+itemIndex);
 			int itemQuantity = orderItems.get(itemIndex).getQuantity();
-			//System.out.println("Item Quantity is "+itemQuantity);
 			if(itemQuantity > 1){
 				orderItems.get(itemIndex).setQuantity(itemQuantity-1);
-				//System.out.println("Item Quantity is > 1 ");
 			}
 			else{
 				orderItems.remove(orderItem);
-				//System.out.println("Item Quantity is <= 1 ");
 			}
 			
 		}
@@ -98,25 +85,36 @@ public class Order extends Model implements Cloneable{
 		this.orderStatus = status;
 	}
 	
-	public Date getOrderDate(){
+	public long getOrderDate() {
 		return orderDate;
 	}
 	
-	public void setOrderDate(Date orderDate){
+	public Date getFormattedDate() {
+		return new Date(orderDate);
+	}
+
+	public void setOrderDate(long orderDate) {
 		this.orderDate = orderDate;
 	}
-	
+
 	//save
 	public OrderMemento createMemento(){
-		return new OrderMemento(this);
+		return new OrderMemento(this.orderId, this.orderDate, this.orderStatus, this.orderItems);
 	}
 	
 	//restore
 	public void setMemento(OrderMemento memento){
-		this.orderId = memento.getOrder().getOrderId();
-		this.orderDate = memento.getOrder().getOrderDate();
-		this.orderStatus = memento.getOrder().getOrderStatus();
-		this.orderItems = memento.getOrder().getOrderItems();
+		this.orderId = memento.getOrderId();
+		this.orderDate = memento.getOrderDate();
+		this.orderStatus = memento.getOrderStatus();
+		List<OrderItem> newList = new ArrayList<OrderItem>();
+		for(OrderItem item: memento.getOrderItems()){
+			OrderItem newItem = new OrderItem();
+			newItem.setMenuItem(item.getMenuItem());
+			newItem.setQuantity(item.getQuantity());
+			newList.add(newItem);
+		}
+		this.orderItems = newList;
 	}
 	
 	public Order clone(){
@@ -124,8 +122,14 @@ public class Order extends Model implements Cloneable{
 		clone.setorderId(this.orderId);
 		clone.setOrderDate(this.orderDate);
 		clone.setOrderStatus(this.orderStatus);
-		clone.setOrderItems(this.getOrderItems());
-		
+		List<OrderItem> newList = new ArrayList<OrderItem>();
+		for(OrderItem item: this.getOrderItems()){
+			OrderItem newItem = new OrderItem();
+			newItem.setMenuItem(item.getMenuItem());
+			newItem.setQuantity(item.getQuantity());
+			newList.add(newItem);
+		}
+		clone.setOrderItems(newList);		
 		return clone;
 	}
 	
@@ -136,5 +140,4 @@ public class Order extends Model implements Cloneable{
 	public void  setOrderItems(List<OrderItem> orderItems){
 		this.orderItems = orderItems;
 	}	
-
 }

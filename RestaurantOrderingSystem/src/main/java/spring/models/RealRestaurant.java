@@ -12,16 +12,14 @@ public class RealRestaurant extends Model implements Restaurant {
 	private String name;
 	private String location;
 	
-	//TODO make real
-	@Transient
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Menu menu;
 	
 	@OneToOne(cascade = {CascadeType.ALL})
 	private StaffList staffList;
 	private boolean isOpen;
 	
-	//TODO make real
-	@Transient
+	@OneToOne(cascade = {CascadeType.ALL})
 	private OrderHistory orderHistory;
 	
 	public String getName() {

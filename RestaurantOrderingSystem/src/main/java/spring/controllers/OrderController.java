@@ -1,6 +1,8 @@
 package spring.controllers;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,53 +28,57 @@ public class OrderController {
 	private Order order;	
 	private User customer;
 	private Restaurant restaurant = DBManager.getRestaurant();
-	private ArrayList<OrderMemento> mementos = new ArrayList<OrderMemento>();
+	private OrderMemento orderMemento = new OrderMemento();
+	
 	
 	@GetMapping("/manageOrder")
 	public String loadPage(Model model) {
-		if (DBManager.getOrder() == null){
-			buildTestData();
+		restaurant = DBManager.getRestaurant();
+		restaurant.setIsOpen(true);
+		
+		OrderHistory history = DBManager.getLoggedInUser().getOrderHistory();
+		Set<Order> orders = history.getOrdersByStatus("ACTIVE");
+		if (orders.size() == 0){
+			buildBasicOrder();
 		}
-		/*if (DBManager.getModel(Order.class, 1) == null) {
-			buildTestData();
-		}	*/			
+		else{
+			order = orders.iterator().next();
+		}
 		model.addAttribute("order", order);
 		model.addAttribute("items", order.getOrderItems() );
-		//model.addAttribute("controller", this );
 		return "manageOrder";
 	}
 	
-	private void buildTestData(){
+	private void buildBasicOrder(){
 		order = createOrder();
-		//myOrder.setorderId(105);
+		order.setOrderDate(System.currentTimeMillis());
 		addToOrder(new MenuItem("Free Chips and Salsa", "Free Chips and Salsa Appetizer", 0.00,null));
-		restaurant = DBManager.getRestaurant();
-		restaurant.setIsOpen(true);
 	}
 	
 	public Order createOrder(){
 		this.order = new Order();		
-		//OrderHistory orderHistory = customer.getOrderHistory();
-		//orderHistory.addOrder(order);	
+		OrderHistory history = DBManager.getLoggedInUser().getOrderHistory();
+		history.addOrder(order);	
+		DBManager.saveModel(history);
 		return order;
 	}
 	
 	@PostMapping("/manageOrder/submit")
 	public ModelAndView submit(){
 		submitOrder();		
-		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/manageOrder/"));
+		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/home"));
 	}
 	
 	public void submitOrder(){
-		restaurant.setIsOpen(true);
 		if (restaurant.isOpen()){
-			order.setOrderStatus("Submitted");
+			order.setOrderStatus("SUBMITTED");
 			DBManager.saveModel(order);
-			OrderHistory orderHistory = restaurant.getOrders();
+			OrderHistory orderHistory = DBManager.getRestaurant().getOrders();
 			if(orderHistory == null){
 				orderHistory = new OrderHistory();
 			}
 			orderHistory.addOrder(order);
+			DBManager.saveModel(orderHistory);
 		}
 		else{
 			System.out.println("Restaurant is currently closed. Order not submitted.");
@@ -82,27 +88,37 @@ public class OrderController {
 	@PostMapping("/manageOrder/cancel")
 	public ModelAndView cancel(){
 		cancelOrder();		
-		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/"));
+		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/home"));
 	}	
 	public void cancelOrder(){
-		order.setOrderStatus("Cancelled");
+		order.setOrderStatus("CANCELLED");
 		DBManager.saveModel(order);
 	}
 
 	@PostMapping("/manageOrder/save")
-	public ModelAndView save(Order order){
-		saveOrder(order);		
+	public ModelAndView save(){
+		saveOrder();		
 		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/manageOrder/"));
 	}		
-	public void saveOrder(Order order){		
-		mementos.add(order.createMemento());
+	public void saveOrder(){		
+		orderMemento = order.createMemento();
 		DBManager.saveModel(order);
-		System.out.println("Saving order");
 	}
 	
+	@PostMapping("/manageOrder/resume")
+	public ModelAndView resume(){
+		Order newOrder = new Order();
+		newOrder = resumeOrder();	
+		this.order = newOrder;
+		DBManager.saveModel(order);	
+		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/manageOrder/"));
+	}		
 	public Order resumeOrder(){		
-		order.setMemento(mementos.get(1));
-		DBManager.getModel(Order.class, order.getId());
+		
+		/*for(OrderItem item: order.getOrderItems()){
+			DBManager.deleteModel(item);
+		}*/ //don't delete OrderItems manually when cascadetype is ALL from Order to OrderItem
+		order.setMemento(orderMemento);//restore from memento
 		return order;
 	}
 
@@ -121,14 +137,12 @@ public class OrderController {
 	}		
 	public void addToOrder(MenuItem menuItem){
 		OrderItem orderItem = order.addItem(menuItem);
-		DBManager.saveModel(menuItem);	
-		DBManager.saveModel(orderItem);
+		DBManager.saveModel(menuItem);
 		DBManager.saveModel(order);
 	}
 
 	@PostMapping("/manageOrder/remove")
 	public ModelAndView remove(int id, Model model){
-	//public ModelAndView remove(OrderItem orderItem, Model model){
 		OrderItem orderItem = (OrderItem) DBManager.getModel(OrderItem.class, id);
 		System.out.println("Calling removeFromOrder on "+orderItem);
 		removeFromOrder(orderItem);	
@@ -137,11 +151,10 @@ public class OrderController {
 	public void removeFromOrder(OrderItem orderItem){
 		int itemIndex = order.getOrderItems().indexOf(orderItem);
 		int itemQuantity = order.getOrderItems().get(itemIndex).getQuantity();
-		if(itemQuantity <= 1){	
+		/*if(itemQuantity <= 1){	
 			DBManager.deleteModel(orderItem);
-		}
+		}*///don't delete OrderItems manually when cascadetype is ALL from Order to OrderItem
 		order.removeItem(orderItem);
-		//DBManager.saveModel(orderItem.getMenuItem());
 		DBManager.saveModel(order);
 	}
 	
@@ -149,10 +162,16 @@ public class OrderController {
 		return order.calculateOrderTotal();
 	}
 	
+
+	@PostMapping("/manageOrder/duplicate")
+	public ModelAndView duplicate(){
+		order = duplicateOrder();		
+		return new ModelAndView(new RedirectView("/RestaurantOrderingSystem/manageOrder/"));
+	}	
 	public Order duplicateOrder(){
 		Order duplicate = order.clone();
-		order.setOrderStatus("Active");
-		DBManager.saveModel(order);
+		duplicate.setOrderStatus("ACTIVE");
+		DBManager.saveModel(duplicate);
 		return duplicate;
 	}
 	

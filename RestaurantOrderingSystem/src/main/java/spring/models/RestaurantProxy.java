@@ -1,5 +1,7 @@
 package spring.models;
 
+import utils.DBManager;
+
 public class RestaurantProxy implements Restaurant {
 	private RealRestaurant restaurant = new RealRestaurant();
 
@@ -9,52 +11,53 @@ public class RestaurantProxy implements Restaurant {
 	}
 
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return restaurant.getName();
 	}
 
 	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
+		if (canManageRestaurant()) {
+			restaurant.setName(name);
+		}		
 	}
 
 	public String getLocation() {
-		// TODO Auto-generated method stub
-		return null;
+		return restaurant.getLocation();
 	}
 
 	public void setLocation(String location) {
-		// TODO Auto-generated method stub
-		
+		if (canManageRestaurant()) {
+			restaurant.setLocation(location);
+		}
 	}
 
 	public Menu getMenu() {
-		// TODO Auto-generated method stub
-		return null;
+		return restaurant.getMenu();
 	}
 
 	public void setMenu(Menu menu) {
-		// TODO Auto-generated method stub
-		
+		if (canManageRestaurant()) {
+			restaurant.setMenu(menu);
+		}
 	}
 
 	public StaffList getStaff() {
-		// TODO Auto-generated method stub
-		return null;
+		return restaurant.getStaff();
 	}
 
 	public void setStaff(StaffList staffList) {
-		// TODO Auto-generated method stub
-		
+		if (canManageRestaurant()) {
+			restaurant.setStaff(staffList);
+		}
 	}
 
 	public boolean isOpen() {
-		// TODO Auto-generated method stub
 		return restaurant.isOpen();
 	}
 
 	public void setIsOpen(boolean isOpen) {
-		restaurant.setIsOpen(isOpen);
+		if (canManageRestaurant()) {
+			restaurant.setIsOpen(isOpen);
+		}
 	}
 
 	public OrderHistory getOrders() {
@@ -62,7 +65,20 @@ public class RestaurantProxy implements Restaurant {
 	}
 
 	public void setOrders(OrderHistory orderHistory) {
-		restaurant.setOrders(orderHistory);
+		if (canManageRestaurant()) {
+			restaurant.setOrders(orderHistory);
+		}
+	}
+	
+	private boolean canManageRestaurant() {
+		User requestingUser = DBManager.getLoggedInUser();
 		
+		Permission permission = restaurant.getStaff().getPermissionForStaff(requestingUser);
+		
+		if (permission != null) {
+			return permission.canManageRestaurant();
+		}
+		
+		return false;
 	}
 }

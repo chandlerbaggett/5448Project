@@ -1,7 +1,8 @@
 package spring.models;
 
-import javax.persistence.Embedded;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -11,9 +12,8 @@ public class User extends Model {
 	private String userName;
 	private String password;
 	
-	@Embedded
+	@OneToOne(cascade = {CascadeType.ALL})
 	private OrderHistory orderHistory;
-	
 	
 	public User() {
 		super();

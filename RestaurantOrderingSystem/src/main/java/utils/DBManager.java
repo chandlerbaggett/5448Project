@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -97,32 +99,25 @@ public class DBManager {
 		Session session = sessionFactory.openSession();	
 		session.beginTransaction();
 		
-		RealRestaurant restaurant = session.get(RealRestaurant.class, 1);
+		Query<RealRestaurant> query=  session.createQuery("from RealRestaurant");
+
+		query.setFirstResult(0);
+		query.setMaxResults(1);
+		List<RealRestaurant> restaurantList = query.list();
 		
 		session.getTransaction().commit();	
 		session.close();	
 		
+		if (restaurantList.size() == 0) {
+			return null;
+		}
+		
+		RealRestaurant restaurant = restaurantList.get(0);
 		return new RestaurantProxy(restaurant);	
 	}
 	
 	public static User getLoggedInUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return getUser(authentication.getName());
-	}
-
-	public static Order getOrder() {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		
-		Session session = sessionFactory.openSession();	
-		session.beginTransaction();
-		
-		Query<Order> query=  session.createQuery("from Order ");
-
-		Order order = (Order) query.uniqueResult();
-		
-		session.getTransaction().commit();	
-		session.close();
-		
-		return order;
 	}
 }

@@ -1,13 +1,13 @@
 package spring.models;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,11 +16,11 @@ import javax.persistence.Table;
 public class StaffList extends Model {
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-	private Collection<StaffMember> staffMembers;
+	private Set<StaffMember> staffMembers;
 
 	public StaffList() {
 		super();
-		staffMembers = new ArrayList<StaffMember>();
+		staffMembers = new HashSet<StaffMember>();
 	}
 	
 	public void addStaffMember(User user, Permission permission) {
@@ -63,7 +63,7 @@ public class StaffList extends Model {
 		while (iterator.hasNext()) {
 			StaffMember member = iterator.next();
 			
-			if (member.getUser().equals(user)) {
+			if (member.getUser().getId() == user.getId()) {
 				return member.getPermission();
 			}
 		}
@@ -75,7 +75,7 @@ public class StaffList extends Model {
 		return staffMembers;
 	}
 
-	public void setStaffMembers(Collection<StaffMember> staffMembers) {
+	public void setStaffMembers(Set<StaffMember> staffMembers) {
 		this.staffMembers = staffMembers;
 	}
 }

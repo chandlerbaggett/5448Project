@@ -25,16 +25,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          	.antMatchers("/createAccount").anonymous()
             .anyRequest().authenticated()
             .and()
-            .formLogin().defaultSuccessUrl("/home", true)
+            .formLogin().failureUrl("/login?error=failure").defaultSuccessUrl("/home", true)
             .loginPage("/login")
             .permitAll()
-           
-        
             .and()
             .csrf().disable();
-//            .and().regexMatcher("createAccount").anonymous();
-        
 	}
-    
-    
 }
